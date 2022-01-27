@@ -2,9 +2,9 @@
 
 namespace GetContent\GetContent\Tests;
 
+use GetContent\GetContent\GetContentServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use GetContent\GetContent\GetContentServiceProvider;
 
 class TestCase extends Orchestra
 {
