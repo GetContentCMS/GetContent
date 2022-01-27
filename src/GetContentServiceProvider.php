@@ -2,9 +2,9 @@
 
 namespace GetContent\GetContent;
 
+use GetContent\GetContent\Commands\GetContentCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use GetContent\GetContent\Commands\GetContentCommand;
 
 class GetContentServiceProvider extends PackageServiceProvider
 {
