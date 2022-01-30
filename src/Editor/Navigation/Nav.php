@@ -14,7 +14,7 @@ class Nav
      */
     public function create(string $name): NavItem
     {
-        $item = (new NavItem)->name($name);
+        $item = (new NavItem())->name($name);
 
         $this->items[] = $item;
 

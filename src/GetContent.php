@@ -2,10 +2,10 @@
 
 namespace GetContent\CMS;
 
+use Exception;
 use GetContent\CMS\Document\Field;
 use GetContent\CMS\Exceptions\GetContentException;
 use GetContent\CMS\Models\Template;
-use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Str;
@@ -24,7 +24,7 @@ class GetContent
      */
     public function registerField($alias, $class): void
     {
-        if (!is_subclass_of($class, Field::class)) {
+        if (! is_subclass_of($class, Field::class)) {
             throw new GetContentException('Fields must extend GetContent Field class');
         }
 

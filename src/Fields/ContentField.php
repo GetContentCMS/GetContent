@@ -2,12 +2,11 @@
 
 namespace GetContent\CMS\Fields;
 
-use GetContent\CMS\Document\Field;
 use Arr;
+use GetContent\CMS\Document\Field;
 
 class ContentField extends Field
 {
-
     public function getEditorViewProperty(): \Illuminate\View\View
     {
         return view('gc::editor.fields.content');
@@ -22,7 +21,7 @@ class ContentField extends Field
     {
         return tap(parent::getModelProperty(), static function (&$model) {
             $model = Arr::wrap($model);
-            if (!Arr::has($model, 'html')) {
+            if (! Arr::has($model, 'html')) {
                 $model['html'] = '';
             }
         });

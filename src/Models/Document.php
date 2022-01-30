@@ -3,14 +3,14 @@
 namespace GetContent\CMS\Models;
 
 use GetContent\CMS\Facades\GetContent;
-use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Spatie\SchemalessAttributes\SchemalessAttributesTrait;
-use Illuminate\Support\Facades\Validator;
 
 /**
  * @property \Spatie\SchemalessAttributes\SchemalessAttributes $model
@@ -51,7 +51,7 @@ class Document extends Model
 
     public function getUsingGroupSchemaAttribute(): bool
     {
-        return blank($this->schema) && $this->group && !blank($this->group->schema);
+        return blank($this->schema) && $this->group && ! blank($this->group->schema);
     }
 
     /**
@@ -109,7 +109,7 @@ class Document extends Model
      */
     public function addField($fieldAttributes, $initialValue = null, int $spliceIndex = null): Document
     {
-        if (!Arr::has($fieldAttributes, 'modelKey')) {
+        if (! Arr::has($fieldAttributes, 'modelKey')) {
             // Auto create model key
             $fieldAttributes['modelKey'] = $this->nextModelOfType(Arr::get($fieldAttributes, 'type'));
         }
@@ -126,7 +126,7 @@ class Document extends Model
                         }
                     },
                 ],
-                'template' => 'nullable'
+                'template' => 'nullable',
             ]
         );
 

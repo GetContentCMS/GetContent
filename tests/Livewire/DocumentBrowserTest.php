@@ -5,8 +5,8 @@ namespace GetContent\CMS\Tests\Livewire;
 use GetContent\CMS\Http\Livewire\DocumentBrowser;
 use GetContent\CMS\Models\Document;
 use GetContent\CMS\Models\Group;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use GetContent\CMS\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
 class DocumentBrowserTest extends TestCase
@@ -121,11 +121,11 @@ class DocumentBrowserTest extends TestCase
         $this->assertSoftDeleted($groups->first());
         $this->assertNotSoftDeleted($groups->last());
 
-        $documents->take(3)->each(function($document) {
+        $documents->take(3)->each(function ($document) {
             $this->assertSoftDeleted($document);
         });
 
-        $documents->skip(3)->each(function($document) {
+        $documents->skip(3)->each(function ($document) {
             $this->assertNotSoftDeleted($document);
         });
     }

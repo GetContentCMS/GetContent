@@ -2,10 +2,10 @@
 
 namespace GetContent\CMS\Http\Livewire;
 
-use GetContent\CMS\Models\Document;
-use GetContent\CMS\Models\Group;
 use Carbon\Carbon;
 use DB;
+use GetContent\CMS\Models\Document;
+use GetContent\CMS\Models\Group;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,12 +18,12 @@ class DocumentBrowser extends Component
 
     public function render(): \Illuminate\Contracts\View\View
     {
-        $documentsQuery = DB::table((new Document)->getTable())
+        $documentsQuery = DB::table((new Document())->getTable())
             ->select('uuid', 'name', 'created_at', 'updated_at', DB::raw("'document' as type"))
             ->where('group_id', $this->group->id ?? null)
             ->where('deleted_at', null);
 
-        $groupsQuery = DB::table((new Group)->getTable())
+        $groupsQuery = DB::table((new Group())->getTable())
             ->select('uuid', 'name', 'created_at', 'updated_at', DB::raw("'group' as type"))
             ->where('parent_id', $this->group->id ?? null)
             ->where('deleted_at', null);
@@ -38,6 +38,7 @@ class DocumentBrowser extends Component
         $items = $groupsQuery->paginate(25);
         $items->transform(function ($item) {
             $item->updated_at = Carbon::parse($item->updated_at);
+
             return $item;
         });
 

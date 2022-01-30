@@ -4,9 +4,9 @@ namespace GetContent\CMS\Tests\Livewire;
 
 use GetContent\CMS\Facades\GetContent;
 use GetContent\CMS\Models\Template;
+use GetContent\CMS\Tests\TestCase;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use GetContent\CMS\Tests\TestCase;
 
 class GetContentTemplatesTest extends TestCase
 {
@@ -19,12 +19,12 @@ class GetContentTemplatesTest extends TestCase
         $templates = collect([
             Template::create([
                 'name' => 'Video', 'slug' => 'video',
-                'schema' => [['type' => 'text', 'modelKey' => 'videoUrl']]
+                'schema' => [['type' => 'text', 'modelKey' => 'videoUrl']],
             ]),
             Template::create([
                 'name' => 'Download', 'slug' => 'download',
-                'schema' => [['type' => 'file', 'modelKey' => 'file'], ['type' => 'text', 'modelKey' => 'caption']]
-            ])
+                'schema' => [['type' => 'file', 'modelKey' => 'file'], ['type' => 'text', 'modelKey' => 'caption']],
+            ]),
         ]);
 
         $db_templates = GetContent::getFieldTemplates();
@@ -37,12 +37,12 @@ class GetContentTemplatesTest extends TestCase
         $templates = collect([
             Template::create([
                 'name' => 'Video', 'slug' => 'video',
-                'schema' => [['type' => 'text', 'modelKey' => 'videoUrl']]
+                'schema' => [['type' => 'text', 'modelKey' => 'videoUrl']],
             ]),
             Template::create([
                 'name' => 'Download', 'slug' => 'download',
-                'schema' => [['type' => 'file', 'modelKey' => 'file'], ['type' => 'text', 'modelKey' => 'caption']]
-            ])
+                'schema' => [['type' => 'file', 'modelKey' => 'file'], ['type' => 'text', 'modelKey' => 'caption']],
+            ]),
         ]);
 
         $templatesComponent = $this->blade('<x-gc::field-templates/>');

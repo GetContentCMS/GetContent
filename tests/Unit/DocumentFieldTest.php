@@ -2,10 +2,10 @@
 
 namespace GetContent\CMS\Tests\Unit;
 
+use Arr;
 use GetContent\CMS\Document\Field;
 use GetContent\CMS\Facades\GetContent;
 use GetContent\CMS\Models\Document;
-use Arr;
 use GetContent\CMS\Tests\TestCase;
 
 class DocumentFieldTest extends TestCase
@@ -114,7 +114,7 @@ class DocumentFieldTest extends TestCase
             'modelKey' => 'text1',
             'order' => 0,
             'type' => 'text',
-            'model' => 'Some value'
+            'model' => 'Some value',
         ], $field->toArray());
     }
 
@@ -135,7 +135,7 @@ class DocumentFieldTest extends TestCase
     {
         $field = new ChangeModelOnSet([
             'type' => 'text',
-            'modelKey' => 'text1'
+            'modelKey' => 'text1',
         ], Document::factory()->make());
 
         $field->model = 'foo';
@@ -147,7 +147,7 @@ class DocumentFieldTest extends TestCase
     {
         $field = new ChangeModelOnGet([
             'type' => 'text',
-            'modelKey' => 'text1'
+            'modelKey' => 'text1',
         ], Document::factory()->make(['model' => ['text1' => 'foo']]));
 
         $this->assertEquals('FOO', $field->model);

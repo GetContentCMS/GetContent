@@ -3,9 +3,9 @@
 namespace GetContent\CMS\Tests\Livewire;
 
 use GetContent\CMS\Http\Livewire\FileBrowser;
-use Illuminate\Http\Testing\File;
-use \Illuminate\Support\Facades\Storage;
 use GetContent\CMS\Tests\TestCase;
+use Illuminate\Http\Testing\File;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 
 class FileBrowserTest extends TestCase

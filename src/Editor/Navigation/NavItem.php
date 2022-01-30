@@ -21,11 +21,12 @@ class NavItem
      */
     public function name(string $name = null)
     {
-        if (!$name) {
+        if (! $name) {
             return $this->name;
         }
 
         $this->name = $name;
+
         return $this;
     }
 
@@ -35,11 +36,12 @@ class NavItem
      */
     public function url(string $url = null)
     {
-        if (!$url) {
+        if (! $url) {
             return $this->url;
         }
 
-        $this->url = !Str::of($url)->startsWith('http') ? url($url) : $url;
+        $this->url = ! Str::of($url)->startsWith('http') ? url($url) : $url;
+
         return $this;
     }
 
@@ -49,11 +51,12 @@ class NavItem
      */
     public function route(string $route = null)
     {
-        if (!$route) {
+        if (! $route) {
             return blank($this->route) ? null : route($this->route);
         }
 
         $this->route = $route;
+
         return $this;
     }
 
@@ -63,11 +66,12 @@ class NavItem
      */
     public function icon(string $icon = null)
     {
-        if (!$icon) {
+        if (! $icon) {
             return $this->icon;
         }
 
         $this->icon = $icon;
+
         return $this;
     }
 
@@ -77,11 +81,12 @@ class NavItem
      */
     public function active(string $active = null)
     {
-        if (!$active) {
+        if (! $active) {
             return $this->active;
         }
 
         $this->active = $active;
+
         return $this;
     }
 

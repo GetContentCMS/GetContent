@@ -2,8 +2,8 @@
 
 namespace GetContent\CMS;
 
-class Composer {
-
+class Composer
+{
     private object $data;
     private $composerFilePath = __DIR__ . '/../composer.json';
 
@@ -18,7 +18,7 @@ class Composer {
 
     public function loadComposerFile(): void
     {
-        if (!file_exists($this->composerFilePath)) {
+        if (! file_exists($this->composerFilePath)) {
             return;
         }
 

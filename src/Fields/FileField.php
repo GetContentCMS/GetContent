@@ -2,7 +2,6 @@
 
 namespace GetContent\CMS\Fields;
 
-use Arr;
 use GetContent\CMS\Document\Field;
 use Storage;
 
@@ -22,7 +21,7 @@ class FileField extends Field
     {
         $filename = data_get($this->model, 'value');
 
-        if (!Storage::disk('files')->exists($filename)) {
+        if (! Storage::disk('files')->exists($filename)) {
             return null;
         }
 

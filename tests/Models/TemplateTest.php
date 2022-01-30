@@ -18,7 +18,7 @@ class TemplateTest extends TestCase
 
         $this->assertEquals([
             ['type' => 'text', 'modelKey' => 'url'],
-            ['type' => 'text', 'modelKey' => 'title']
+            ['type' => 'text', 'modelKey' => 'title'],
         ], $template->schema->toArray());
     }
 
@@ -31,7 +31,7 @@ class TemplateTest extends TestCase
 
         $this->assertEquals([
             ['type' => 'text', 'modelKey' => 'text1'],
-            ['type' => 'text', 'modelKey' => 'text2']
+            ['type' => 'text', 'modelKey' => 'text2'],
         ], $template->schema->toArray());
     }
 
@@ -44,13 +44,13 @@ class TemplateTest extends TestCase
 
         $this->assertEquals([
             ['type' => 'text', 'modelKey' => 'url'],
-            ['type' => 'text', 'modelKey' => 'title']
+            ['type' => 'text', 'modelKey' => 'title'],
         ], $template->schema->toArray());
 
         $template->removeField('url');
 
         $this->assertEquals([
-            ['type' => 'text', 'modelKey' => 'title']
+            ['type' => 'text', 'modelKey' => 'title'],
         ], $template->schema->toArray());
     }
 
@@ -64,7 +64,7 @@ class TemplateTest extends TestCase
 
         $this->assertEquals([
             ['type' => 'text', 'modelKey' => 'url'],
-            ['type' => 'text', 'modelKey' => 'text1']
+            ['type' => 'text', 'modelKey' => 'text1'],
         ], $template->schema->toArray());
     }
 
@@ -76,11 +76,11 @@ class TemplateTest extends TestCase
                 'schema' => [
                     [
                         'type' => 'text',
-                        'modelKey' => 'text1'
+                        'modelKey' => 'text1',
                     ],
                     [
                         'type' => 'text',
-                        'modelKey' => 'text2'
+                        'modelKey' => 'text2',
                     ],
                 ],
             ]
@@ -91,11 +91,11 @@ class TemplateTest extends TestCase
         $this->assertEquals($template->schema->toArray(), [
             [
                 'type' => 'text',
-                'modelKey' => 'updatedText'
+                'modelKey' => 'updatedText',
             ],
             [
                 'type' => 'text',
-                'modelKey' => 'text2'
+                'modelKey' => 'text2',
             ],
         ]);
     }
