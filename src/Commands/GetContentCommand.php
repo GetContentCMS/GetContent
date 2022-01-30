@@ -1,6 +1,6 @@
 <?php
 
-namespace GetContent\GetContent\Commands;
+namespace GetContent\CMS\Commands;
 
 use Illuminate\Console\Command;
 

@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+
+    public function up()
+    {
+        Schema::create('groups', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->uuid('uuid')->index();
+            $table->string('name');
+            $table->string('slug')->index();
+            $table->text('description')->nullable();
+            $table->schemalessAttributes('schema')->default('{}');
+            $table->schemalessAttributes('meta')->default('{}');
+            $table->nestedSet();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+    }
+};

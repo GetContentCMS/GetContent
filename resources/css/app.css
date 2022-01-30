@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none !important;
+}
+
+.focus-outline {
+    @apply outline-none ring-blue-500 ring-opacity-25
+    focus:ring focus:border-blue-500
+    focus-within:ring focus-within:border-blue-500
+    dark:ring-opacity-50
+    dark:focus:border-blue-500 dark:focus-within:border-blue-500;
+}
+
+/*
+    Shopify Sortable Classes
+*/
+.draggable-mirror {
+    @apply z-50 w-full max-w-lg;
+}
+.draggable-mirror > div {
+    @apply overflow-hidden p-2 w-full rounded-md border-2 border-blue-500 shadow-2xl transform scale-90 rotate-1;
+}
+
+.draggable-source--is-dragging {
+    @apply opacity-40 transition-transform duration-300 transform scale-95;
+}
+
+/* Pikaday Customisation */
+
+@import '../../node_modules/pikaday/css/pikaday.css';
+
+.pika-single {
+    @apply bg-white bg-opacity-80 rounded shadow-lg backdrop-filter backdrop-blur-xl;
+}
+
+.pika-single abbr[title] {
+    @apply no-underline cursor-default;
+}
+
+.pika-table td:not(.is-empty) {
+    @apply bg-transparent;
+}
+
+.pika-button {
+    @apply leading-normal text-center bg-transparent rounded border-none;
+}
+
+.pika-button:hover, .pika-row.pick-whole-week:hover .pika-button {
+    @apply text-blue-600 bg-blue-200;
+}
+
+.is-today .pika-button {
+    @apply text-green-500;
+}
+
+.is-selected .pika-button, .has-event .pika-button {
+    @apply text-blue-100 bg-blue-500;
+}
+
+.pika-label {
+    @apply bg-transparent;
+}
+
+/* Pikaday Dark mode */
+
+.dark .pika-single, .dark.pika-single {
+    @apply bg-gray-800 bg-opacity-80 border-gray-700 backdrop-filter backdrop-blur-xl;
+}
+
+.dark .pika-table td:not(.is-empty) {
+    @apply bg-transparent;
+}
+
+.dark .pika-button {
+    @apply text-gray-100 bg-transparent;
+}
+
+.dark .pika-button:hover, .dark .pika-row.pick-whole-week:hover .pika-button {
+    @apply text-blue-100 bg-blue-800;
+}
+
+.dark .is-today .pika-button {
+    @apply text-green-500;
+}
+
+.dark .is-selected .pika-button, .dark .has-event .pika-button {
+    @apply text-blue-100 bg-blue-500;
+}
+
+.dark .pika-prev {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M8 12l6-6v12z' fill='rgba(255,255,255,1)'/%3E%3C/svg%3E");
+}
+
+.dark .pika-next {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M16 12l-6 6V6z' fill='rgba(255,255,255,1)'/%3E%3C/svg%3E");
+}
+
+.dark .pika-label {
+    @apply text-white bg-transparent;
+}

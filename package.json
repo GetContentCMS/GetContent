@@ -1,0 +1,36 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "yarn development",
+        "development": "mix",
+        "watch": "mix watch",
+        "prod": "yarn production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@alpinejs/collapse": "^3.8.1",
+        "@alpinejs/focus": "^3.8.1",
+        "@tailwindcss/aspect-ratio": "^0.4.0",
+        "@tailwindcss/forms": "^0.3.4",
+        "@tailwindcss/typography": "^0.5.0",
+        "@tiptap/core": "^2.0.0-beta.122",
+        "@tiptap/extension-bubble-menu": "^2.0.0-beta.40",
+        "@tiptap/extension-highlight": "^2.0.0-beta.23",
+        "@tiptap/extension-link": "^2.0.0-beta.21",
+        "@tiptap/extension-placeholder": "^2.0.0-beta.32",
+        "@tiptap/extension-text-align": "^2.0.0-beta.23",
+        "@tiptap/extension-typography": "^2.0.0-beta.15",
+        "@tiptap/extension-underline": "^2.0.0-beta.16",
+        "@tiptap/starter-kit": "^2.0.0-beta.121",
+        "alpinejs": "^3.4.2",
+        "autoprefixer": "^10.4.2",
+        "laravel-mix": "^6.0.41",
+        "livewire-sortable": "^0.2.2",
+        "lodash": "^4.17.21",
+        "moment": "^2.29.1",
+        "pikaday": "^1.8.2",
+        "postcss": "^8.4.5",
+        "tailwindcss": "^3.0.17",
+        "tippy.js": "^6.3.2"
+    }
+}
