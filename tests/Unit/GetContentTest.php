@@ -3,9 +3,9 @@
 namespace GetContent\CMS\Tests\Unit;
 
 use GetContent\CMS\Facades\GetContent;
+use GetContent\CMS\Tests\TestCase;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
-use GetContent\CMS\Tests\TestCase;
 
 class GetContentTest extends TestCase
 {

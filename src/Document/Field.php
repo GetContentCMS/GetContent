@@ -2,9 +2,9 @@
 
 namespace GetContent\CMS\Document;
 
-use GetContent\CMS\Models\Document;
 use Arr;
 use Exception;
+use GetContent\CMS\Models\Document;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\View\View;
 use Str;
@@ -66,7 +66,7 @@ class Field implements Arrayable
     {
         $method = 'get'.ucfirst($name).'Property';
 
-        if (!method_exists($this, $method)) {
+        if (! method_exists($this, $method)) {
             return Arr::get($this->attributes, $name);
         }
 
@@ -86,7 +86,7 @@ class Field implements Arrayable
     {
         $method = 'set'.ucfirst($name).'Property';
 
-        if (!method_exists($this, $method)) {
+        if (! method_exists($this, $method)) {
             Arr::set($this->attributes, $name, $value);
 
             // @todo Refactor this attempt to sync $this->attributes and $this->document->schema
@@ -118,7 +118,7 @@ class Field implements Arrayable
 
     public function getModelPath($suffix = null): string
     {
-        if ($suffix && !collect($this->model)->has($suffix)) {
+        if ($suffix && ! collect($this->model)->has($suffix)) {
             $this->model = collect($this->model)->put($suffix, '');
         }
 
@@ -172,8 +172,9 @@ class Field implements Arrayable
 
     public function toArray(): array
     {
-        return tap($this->attributes,
-            fn(&$attributes) => $attributes['model'] = $this->model
+        return tap(
+            $this->attributes,
+            fn (&$attributes) => $attributes['model'] = $this->model
         );
     }
 
@@ -192,6 +193,7 @@ class Field implements Arrayable
     public function setBaseModel(string $baseModel): Field
     {
         $this->baseModel = $baseModel.(blank($baseModel) ? '' : '.');
+
         return $this;
     }
 }

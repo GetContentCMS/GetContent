@@ -5,8 +5,8 @@ namespace GetContent\CMS\Tests\Livewire;
 use GetContent\CMS\Http\Livewire\DocumentBrowser;
 use GetContent\CMS\Models\Document;
 use GetContent\CMS\Models\Group;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use GetContent\CMS\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
 class DocumentBrowserNavigationTest extends TestCase

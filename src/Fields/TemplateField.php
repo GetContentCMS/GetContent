@@ -21,8 +21,8 @@ class TemplateField extends Field
             return Template::whereSlug($template)->firstOrFail()->setDocument($this->getDocument());
         }
 
-        return (new Template)->fill([
-            'schema' => $template
+        return (new Template())->fill([
+            'schema' => $template,
         ])->setDocument($this->getDocument());
     }
 }

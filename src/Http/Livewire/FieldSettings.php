@@ -2,8 +2,8 @@
 
 namespace GetContent\CMS\Http\Livewire;
 
-use GetContent\CMS\Document\Field;
 use Arr;
+use GetContent\CMS\Document\Field;
 use Illuminate\Validation\Rule;
 
 /**
@@ -30,7 +30,7 @@ trait FieldSettings
         $this->validate([
             'configureFieldSchema.modelKey' => [
                 'string', 'filled', 'min:1',
-                Rule::notIn($this->document->model->except($this->configureFieldModelKey)->keys())
+                Rule::notIn($this->document->model->except($this->configureFieldModelKey)->keys()),
             ],
         ]);
 

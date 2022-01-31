@@ -2,8 +2,8 @@
 
 namespace GetContent\CMS\Http\Livewire;
 
-use GetContent\CMS\Exceptions\FieldMethodNotFound;
 use Arr;
+use GetContent\CMS\Exceptions\FieldMethodNotFound;
 use GetContent\CMS\Models\Document;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -102,6 +102,7 @@ class DocumentEditor extends Component
 
         $this->document->schema->transform(function ($field) use ($order) {
             $field['order'] = $order->where('value', $field['modelKey'])->first()['order'];
+
             return $field;
         });
     }
@@ -126,7 +127,7 @@ class DocumentEditor extends Component
         $modelKey = Str::after($modelKey, 'model.');
         $field = $this->document->fields->firstWhere('modelKey', $modelKey);
 
-        if (!$field || !method_exists($field, $method)) {
+        if (! $field || ! method_exists($field, $method)) {
             throw new FieldMethodNotFound($modelKey, $method);
         }
 

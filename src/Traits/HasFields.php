@@ -2,10 +2,10 @@
 
 namespace GetContent\CMS\Traits;
 
+use Arr;
 use GetContent\CMS\Facades\GetContent;
 use GetContent\CMS\Models\Document;
 use GetContent\CMS\Models\Template;
-use Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\SchemalessAttributes\SchemalessAttributesTrait;
@@ -35,6 +35,7 @@ trait HasFields
         return $this->schema->sortBy('order')->map(
             function ($field, $index) {
                 $document = (self::class === Document::class) ? $this : $this->document;
+
                 return new (GetContent::getFieldClassForType($field['type']))($field, $document, $this->baseModel);
             }
         )->keyBy('modelKey');
@@ -76,7 +77,7 @@ trait HasFields
      */
     public function addField($fieldAttributes, int $spliceIndex = null): static
     {
-        if (!Arr::has($fieldAttributes, 'modelKey')) {
+        if (! Arr::has($fieldAttributes, 'modelKey')) {
             // Auto create model key
             $fieldAttributes['modelKey'] = $this->nextModelOfType(Arr::get($fieldAttributes, 'type'));
         }

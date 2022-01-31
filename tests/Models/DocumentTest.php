@@ -16,7 +16,7 @@ class DocumentTest extends TestCase
                     ['type' => 'text', 'modelKey' => 'text'],
                     ['type' => 'text', 'modelKey' => 'text2'],
                     ['type' => 'text', 'modelKey' => 'text6'],
-                ]
+                ],
             ]
         );
 
@@ -31,12 +31,12 @@ class DocumentTest extends TestCase
                 'schema' => [
                     [
                         'type' => 'text',
-                        'modelKey' => 'text1'
+                        'modelKey' => 'text1',
                     ],
                 ],
                 'model' => [
-                    'text1' => 'This is some text'
-                ]
+                    'text1' => 'This is some text',
+                ],
             ]
         );
 
@@ -54,17 +54,17 @@ class DocumentTest extends TestCase
                 'schema' => [
                     [
                         'type' => 'text',
-                        'modelKey' => 'text1'
+                        'modelKey' => 'text1',
                     ],
                     [
                         'type' => 'content',
-                        'modelKey' => 'content1'
+                        'modelKey' => 'content1',
                     ],
                 ],
                 'model' => [
                     'text1' => 'This is some text',
-                    'content1' => '<strong>A bit of content</strong>'
-                ]
+                    'content1' => '<strong>A bit of content</strong>',
+                ],
             ]
         );
 
@@ -75,14 +75,14 @@ class DocumentTest extends TestCase
         $this->assertNotSame(
             [
                 'type' => 'text',
-                'modelKey' => 'text1'
+                'modelKey' => 'text1',
             ],
             $document->schema->first()
         );
         $this->assertSame(
             [
                 'type' => 'content',
-                'modelKey' => 'content1'
+                'modelKey' => 'content1',
             ],
             $document->schema->first()
         );
@@ -96,12 +96,12 @@ class DocumentTest extends TestCase
                 'schema' => [
                     [
                         'type' => 'text',
-                        'modelKey' => 'text1'
+                        'modelKey' => 'text1',
                     ],
                 ],
                 'model' => [
-                    'text1' => 'This is some text'
-                ]
+                    'text1' => 'This is some text',
+                ],
             ]
         );
 
@@ -119,22 +119,22 @@ class DocumentTest extends TestCase
                 'schema' => [
                     [
                         'type' => 'text',
-                        'modelKey' => 'text1'
+                        'modelKey' => 'text1',
                     ],
                     [
                         'type' => 'text',
-                        'modelKey' => 'text2'
+                        'modelKey' => 'text2',
                     ],
                     [
                         'type' => 'text',
-                        'modelKey' => 'text3'
+                        'modelKey' => 'text3',
                     ],
                 ],
                 'model' => [
                     'text1' => 'This is some text',
                     'text2' => 'This is some other text',
-                    'text3' => 'This is some more text'
-                ]
+                    'text3' => 'This is some more text',
+                ],
             ]
         );
 
@@ -155,22 +155,22 @@ class DocumentTest extends TestCase
                 'schema' => [
                     [
                         'type' => 'text',
-                        'modelKey' => 'text1'
+                        'modelKey' => 'text1',
                     ],
                     [
                         'type' => 'content',
-                        'modelKey' => 'content1'
+                        'modelKey' => 'content1',
                     ],
                     [
                         'type' => 'media',
-                        'modelKey' => 'media1'
+                        'modelKey' => 'media1',
                     ],
                 ],
                 'model' => [
                     'text1' => ['value' => 'This is some text'],
                     'content1' => ['value' => '<strong>A bit of formatted content</strong>'],
-                    'media1' => ['url' => '/path/to/file.png']
-                ]
+                    'media1' => ['url' => '/path/to/file.png'],
+                ],
             ]
         );
 
@@ -188,17 +188,17 @@ class DocumentTest extends TestCase
                 'schema' => [
                     [
                         'type' => 'text',
-                        'modelKey' => 'text1'
+                        'modelKey' => 'text1',
                     ],
                     [
                         'type' => 'text',
-                        'modelKey' => 'text2'
+                        'modelKey' => 'text2',
                     ],
                 ],
                 'model' => [
                     'text1' => ['value' => 'This is some text'],
                     'text2' => ['value' => 'This is some more text'],
-                ]
+                ],
             ]
         );
 
@@ -207,11 +207,11 @@ class DocumentTest extends TestCase
         $this->assertEquals([
             [
                 'type' => 'text',
-                'modelKey' => 'updatedText'
+                'modelKey' => 'updatedText',
             ],
             [
                 'type' => 'text',
-                'modelKey' => 'text2'
+                'modelKey' => 'text2',
             ],
         ], $document->schema->toArray());
 

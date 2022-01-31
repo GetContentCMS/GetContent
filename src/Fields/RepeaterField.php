@@ -2,9 +2,9 @@
 
 namespace GetContent\CMS\Fields;
 
+use Arr;
 use GetContent\CMS\Document\Field;
 use GetContent\CMS\Models\Template;
-use Arr;
 
 /**
  * @property \Illuminate\Support\Collection|string $template
@@ -34,8 +34,8 @@ class RepeaterField extends Field
             return Template::whereSlug($template)->first()->setDocument($this->getDocument());
         }
 
-        return (new Template)->fill([
-            'schema' => $template
+        return (new Template())->fill([
+            'schema' => $template,
         ])->setDocument($this->getDocument());
     }
 

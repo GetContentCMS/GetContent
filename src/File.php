@@ -7,7 +7,6 @@ use Storage;
 
 class File
 {
-
     private string $filename;
     private array $info;
 

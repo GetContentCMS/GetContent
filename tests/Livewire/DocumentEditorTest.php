@@ -2,11 +2,10 @@
 
 namespace GetContent\CMS\Tests\Livewire;
 
-use GetContent\CMS\Exceptions\FieldMethodNotFound;
-use GetContent\CMS\Fields\FileField;
 use GetContent\CMS\Document\Field;
-use GetContent\CMS\Exceptions\GetContentException;
+use GetContent\CMS\Exceptions\FieldMethodNotFound;
 use GetContent\CMS\Facades\GetContent;
+use GetContent\CMS\Fields\FileField;
 use GetContent\CMS\Http\Livewire\DocumentEditor;
 use GetContent\CMS\Models\Document;
 use GetContent\CMS\Models\Template;
@@ -77,7 +76,7 @@ class DocumentEditorTest extends TestCase
         $this->assertEquals($document->schema->values()->toArray(), [[
             'type' => 'template',
             'template' => 'template-slug',
-            'modelKey' => 'template1'
+            'modelKey' => 'template1',
         ]]);
     }
 
@@ -99,7 +98,7 @@ class DocumentEditorTest extends TestCase
         $document = Document::factory()->make();
         $document->addField([
             'type' => 'repeater',
-            'template' => [['type' => 'text', 'modelKey' => 'text1']]
+            'template' => [['type' => 'text', 'modelKey' => 'text1']],
         ]);
 
         Livewire::test(DocumentEditor::class, ['document' => $document])
