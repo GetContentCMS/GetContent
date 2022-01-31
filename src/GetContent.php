@@ -4,6 +4,8 @@ namespace GetContent\CMS;
 
 use GetContent\CMS\Document\Field;
 use GetContent\CMS\Exceptions\GetContentException;
+use GetContent\CMS\Models\Document;
+use GetContent\CMS\Models\Group;
 use GetContent\CMS\Models\Template;
 use Exception;
 use Illuminate\Support\Facades\Storage;
@@ -64,5 +66,15 @@ class GetContent
     public static function asset($url = '/'): string
     {
         return asset(URL::asset('vendor/getcontent/cms/' . $url));
+    }
+
+    public function documents()
+    {
+        return Document::query();
+    }
+
+    public function documentsFromGroup($groupSlug)
+    {
+        return Group::whereSlug($groupSlug)->firstOrFail()->documents();
     }
 }
