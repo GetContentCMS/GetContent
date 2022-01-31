@@ -11,6 +11,7 @@ use GetContent\CMS\Fields\ImageField;
 use GetContent\CMS\Fields\RepeaterField;
 use GetContent\CMS\Fields\SwitchField;
 use GetContent\CMS\Fields\TemplateField;
+use GetContent\CMS\Fields\TextareaField;
 use GetContent\CMS\Fields\TextField;
 use GetContent\CMS\Http\Livewire\DocumentBrowser;
 use GetContent\CMS\Http\Livewire\DocumentEditor;
@@ -55,7 +56,7 @@ class GetContentServiceProvider extends PackageServiceProvider
     {
         if (config('getcontent.editor_enabled')) {
             Route::prefix(config('getcontent.editor_route'))
-                ->middleware('web')->group(function () {
+                ->middleware('web', ...config('getcontent.editor_middleware'))->group(function () {
                     Route::get('/browse/{group:uuid?}', DocumentBrowser::class)->name('document:browser');
                     Route::get('/document/{document:uuid}', DocumentEditor::class)->name('document:editor');
 
@@ -71,6 +72,7 @@ class GetContentServiceProvider extends PackageServiceProvider
     private function registerFields(): void
     {
         GetContent::registerField('text', TextField::class);
+        GetContent::registerField('textarea', TextareaField::class);
         GetContent::registerField('content', ContentField::class);
         GetContent::registerField('file', FileField::class);
         GetContent::registerField('switch', SwitchField::class);
