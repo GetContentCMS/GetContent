@@ -156,7 +156,7 @@ class DocumentEditorTest extends TestCase
         $document->addField(['type' => 'file']);
 
         $file = UploadedFile::fake()->create('PdUgQW5AurLryNjMfYZvJsN6ytty5yMDYrqMzqPt.pdf');
-        Storage::fake('files');
+        Storage::fake(config('getcontent.file_upload_disk'));
 
         Livewire::test(DocumentEditor::class, ['document' => $document])
             ->set('newFile', $file)
@@ -168,7 +168,7 @@ class DocumentEditorTest extends TestCase
     /** @test */
     public function file_can_be_removed_from_field(): void
     {
-        Storage::fake('files');
+        Storage::fake(config('getcontent.file_upload_disk'));
         GetContent::registerField('file', FileField::class);
 
         $this->withoutExceptionHandling();

@@ -27,11 +27,11 @@ class File
     {
         return [
             'filename' => $this->filename,
-            'url' => Storage::disk('files')->url($this->filename),
-            'path' => Storage::disk('files')->path($this->filename),
-            'size' => Storage::disk('files')->size($this->filename),
-            'mimeType' => Storage::disk('files')->getMimetype($this->filename),
-            'updated_at' => Storage::disk('files')->lastModified($this->filename),
+            'url' => Storage::disk(config('getcontent.file_upload_disk'))->url($this->filename),
+            'path' => Storage::disk(config('getcontent.file_upload_disk'))->path($this->filename),
+            'size' => Storage::disk(config('getcontent.file_upload_disk'))->size($this->filename),
+            'mimeType' => Storage::disk(config('getcontent.file_upload_disk'))->getMimetype($this->filename),
+            'updated_at' => Storage::disk(config('getcontent.file_upload_disk'))->lastModified($this->filename),
         ];
     }
 

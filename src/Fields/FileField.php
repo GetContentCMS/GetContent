@@ -22,17 +22,17 @@ class FileField extends Field
     {
         $filename = data_get($this->model, 'value');
 
-        if (!Storage::disk('files')->exists($filename)) {
+        if (!Storage::disk(config('getcontent.file_upload_disk'))->exists($filename)) {
             return null;
         }
 
         return [
-            'name' => Storage::disk('files')->getMetadata($filename)['path'],
-            'url' => Storage::disk('files')->url($filename),
-            'path' => Storage::disk('files')->path($filename),
-            'size' => Storage::disk('files')->size($filename),
-            'mime' => Storage::disk('files')->getMimetype($filename),
-            'updated_at' => Storage::disk('files')->lastModified($filename),
+            'name' => Storage::disk(config('getcontent.file_upload_disk'))->getMetadata($filename)['path'],
+            'url' => Storage::disk(config('getcontent.file_upload_disk'))->url($filename),
+            'path' => Storage::disk(config('getcontent.file_upload_disk'))->path($filename),
+            'size' => Storage::disk(config('getcontent.file_upload_disk'))->size($filename),
+            'mime' => Storage::disk(config('getcontent.file_upload_disk'))->getMimetype($filename),
+            'updated_at' => Storage::disk(config('getcontent.file_upload_disk'))->lastModified($filename),
         ];
     }
 

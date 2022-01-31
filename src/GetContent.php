@@ -50,9 +50,9 @@ class GetContent
     {
         $mimeToMatch = Str::before($mime, '*');
 
-        return collect(Storage::drive('files')->allFiles())->filter(function ($file) use ($mimeToMatch) {
+        return collect(Storage::drive(config('getcontent.file_upload_disk'))->allFiles())->filter(function ($file) use ($mimeToMatch) {
             if ($mimeToMatch) {
-                return Str::startsWith(Storage::drive('files')->getMimetype($file), $mimeToMatch);
+                return Str::startsWith(Storage::drive(config('getcontent.file_upload_disk'))->getMimetype($file), $mimeToMatch);
             }
 
             return true;

@@ -4,6 +4,7 @@ namespace GetContent\CMS;
 
 use GetContent\CMS\Commands\GetContentCommand;
 use GetContent\CMS\Facades\GetContent;
+use GetContent\CMS\Facades\Nav;
 use GetContent\CMS\Fields\ContentField;
 use GetContent\CMS\Fields\FileField;
 use GetContent\CMS\Fields\ImageField;
@@ -57,6 +58,8 @@ class GetContentServiceProvider extends PackageServiceProvider
                 ->middleware('web')->group(function () {
                     Route::get('/browse/{group:uuid?}', DocumentBrowser::class)->name('document:browser');
                     Route::get('/document/{document:uuid}', DocumentEditor::class)->name('document:editor');
+
+                    Route::view('/files', 'gc::editor.file-browser')->name('files:browse');
                 });
         }
 
@@ -81,5 +84,13 @@ class GetContentServiceProvider extends PackageServiceProvider
         Livewire::component('file-browser', FileBrowser::class);
         Livewire::component('document-browser', DocumentBrowser::class);
         Livewire::component('document-editor', DocumentEditor::class);
+
+        Nav::create('Documents')
+            ->route('document:browser')
+            ->icon('heroicon-o-collection');
+
+        Nav::create('Files')
+            ->route('files:browse')
+            ->icon('heroicon-o-folder-open');
     }
 }

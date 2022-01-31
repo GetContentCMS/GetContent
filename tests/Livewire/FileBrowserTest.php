@@ -14,14 +14,14 @@ class FileBrowserTest extends TestCase
     {
         parent::setUp();
 
-        Storage::fake('files');
+        Storage::fake(config('getcontent.file_upload_disk'));
 
-        Storage::drive('files')->putFileAs(
+        Storage::drive(config('getcontent.file_upload_disk'))->putFileAs(
             '/',
             File::fake()->image('Test Image.jpg'),
             'Test Image.jpg'
         );
-        Storage::drive('files')->putFileAs(
+        Storage::drive(config('getcontent.file_upload_disk'))->putFileAs(
             '/',
             File::fake()->create('Test Doc.pdf', 512, 'application/pdf'),
             'Test Doc.pdf'

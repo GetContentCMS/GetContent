@@ -108,7 +108,7 @@ class DocumentEditor extends Component
 
     public function saveNewFile($model, $filename): void
     {
-        if (Storage::disk('files')->exists($filename)) {
+        if (Storage::disk(config('getcontent.file_upload_disk'))->exists($filename)) {
             $path = pathinfo($filename);
             $filename = "{$path['filename']}-".Str::slug(now()).".{$path['extension']}";
         }

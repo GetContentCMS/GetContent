@@ -21,4 +21,12 @@ return [
      * */
     'editor_enabled' => env('GETCONTENT_EDITOR_ENABLED', true),
     'editor_route' => env('GETCONTENT_EDITOR_ROUTE', 'editor'),
+
+    /*
+     * --------------------------------------------------------------------------
+     * File Uploads
+     * --------------------------------------------------------------------------
+     * Specify the filesystem to use for file uploads
+     **/
+    'file_upload_disk' => 'files'
 ];
