@@ -7,6 +7,8 @@
         <x-gc::input id="labelField" label="Label" help="Give the field a specific label" wire:model="configureFieldSchema.label" class="w-full"/>
         <x-gc::textarea id="instructionsField" label="Instructions" help="Give some instructions for using this field" wire:model="configureFieldSchema.instructions" />
 
+        <x-gc::input id="cssClasses" label="CSS Classes" help="CSS classes available when rendering the field" wire:model="configureFieldModel.options.cssClasses" />
+
         {{$this->configureField->editorSettingsView}}
 
         <x-gc::accordion>

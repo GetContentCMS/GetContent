@@ -25,7 +25,7 @@
     </div>
 
     <div class="dark">
-        <x-gc::modal id="fieldSettings" x-on:close.window="$wire.$set('configureFieldModelKey', null)" class="max-w-lg">
+        <x-gc::modal id="fieldSettings" x-on:close.window="$wire.$set('configureFieldModelKey', null)" class="!max-w-lg">
             <x-slot name="icon"><x-heroicon-o-cog/></x-slot>
 
             @if($configureFieldModelKey)

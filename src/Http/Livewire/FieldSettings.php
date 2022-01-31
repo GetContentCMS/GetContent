@@ -12,12 +12,14 @@ use Illuminate\Validation\Rule;
 trait FieldSettings
 {
     public ?string $configureFieldModelKey = null;
-    public $configureFieldSchema;
+    public ?array $configureFieldSchema;
+    public ?array $configureFieldModel;
 
-    public function configureField($modelKey)
+    public function configureField($modelKey): void
     {
         $this->configureFieldModelKey = $modelKey;
         $this->configureFieldSchema = $this->document->schema->where('modelKey', $this->configureFieldModelKey)->first();
+        $this->configureFieldModel = $this->document->model[$this->configureFieldModelKey];
     }
 
     public function getConfigureFieldProperty()
@@ -25,7 +27,7 @@ trait FieldSettings
         return $this->document->fields->get($this->configureFieldModelKey);
     }
 
-    public function applyFieldSettings()
+    public function applyFieldSettings(): void
     {
         $this->validate([
             'configureFieldSchema.modelKey' => [
@@ -44,7 +46,9 @@ trait FieldSettings
 
         if (($newModelKey = Arr::get($this->configureFieldSchema, 'modelKey')) !== $this->configureFieldModelKey) {
             $this->document->changeModelKey($this->configureFieldModelKey, $newModelKey);
-            $this->dehydrateModel();
         }
+
+        $this->document->model[$this->configureFieldModelKey] = $this->configureFieldModel;
+        $this->dehydrateModel();
     }
 }
