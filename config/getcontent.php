@@ -21,6 +21,7 @@ return [
      * */
     'editor_enabled' => env('GETCONTENT_EDITOR_ENABLED', true),
     'editor_route' => env('GETCONTENT_EDITOR_ROUTE', 'editor'),
+    'editor_middleware' => [],
 
     /*
      * --------------------------------------------------------------------------
