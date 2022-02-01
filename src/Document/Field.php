@@ -66,7 +66,7 @@ class Field implements Arrayable
     {
         $method = 'get'.ucfirst($name).'Property';
 
-        if (!method_exists($this, $method)) {
+        if (! method_exists($this, $method)) {
             return Arr::get($this->attributes, $name);
         }
 
@@ -86,7 +86,7 @@ class Field implements Arrayable
     {
         $method = 'set'.ucfirst($name).'Property';
 
-        if (!method_exists($this, $method)) {
+        if (! method_exists($this, $method)) {
             Arr::set($this->attributes, $name, $value);
 
             // @todo Refactor this attempt to sync $this->attributes and $this->document->schema
@@ -118,7 +118,7 @@ class Field implements Arrayable
 
     public function getModelPath($suffix = null): string
     {
-        if ($suffix && !collect($this->model)->has($suffix)) {
+        if ($suffix && ! collect($this->model)->has($suffix)) {
             $this->model = collect($this->model)->put($suffix, '');
         }
 
