@@ -179,6 +179,39 @@ class DocumentFieldTest extends TestCase
         $this->assertArrayHasKey('value', $field->model);
         $this->assertTrue(Arr::has($doc->model, 'text1.value'));
     }
+
+    /** @test */
+    public function it_returns_the_model_value(): void
+    {
+        /** @var Document $document */
+        $document = Document::factory()->make();
+
+        $document->addField(['type' => 'text'], ['value' => 'Some value']);
+        $field = $document->fields->first();
+        $this->assertEquals('Some value', $field->model());
+    }
+
+    /** @test */
+    public function it_returns_any_model_value_by_key(): void
+    {
+        /** @var Document $document */
+        $document = Document::factory()->make();
+
+        $document->addField(['type' => 'text'], ['value' => 'Some value', 'options' => ['cssClasses' => 'bg-white']]);
+        $field = $document->fields->first();
+        $this->assertEquals('bg-white', $field->model('options.cssClasses'));
+    }
+
+    /** @test */
+    public function it_looks_for_value_suffix_on_model_keys(): void
+    {
+        /** @var Document $document */
+        $document = Document::factory()->make();
+
+        $document->addField(['type' => 'repeater'], ['items' => [['url' => ['value' => 'https://example.com']]]]);
+        $field = $document->fields->first();
+        $this->assertEquals('https://example.com', $field->model('items.0.url'));
+    }
 }
 
 class TextField extends Field

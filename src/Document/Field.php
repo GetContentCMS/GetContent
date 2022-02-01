@@ -2,10 +2,10 @@
 
 namespace GetContent\CMS\Document;
 
-use Arr;
 use Exception;
 use GetContent\CMS\Models\Document;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Str;
 
@@ -66,7 +66,7 @@ class Field implements Arrayable
     {
         $method = 'get'.ucfirst($name).'Property';
 
-        if (! method_exists($this, $method)) {
+        if (!method_exists($this, $method)) {
             return Arr::get($this->attributes, $name);
         }
 
@@ -86,7 +86,7 @@ class Field implements Arrayable
     {
         $method = 'set'.ucfirst($name).'Property';
 
-        if (! method_exists($this, $method)) {
+        if (!method_exists($this, $method)) {
             Arr::set($this->attributes, $name, $value);
 
             // @todo Refactor this attempt to sync $this->attributes and $this->document->schema
@@ -118,7 +118,7 @@ class Field implements Arrayable
 
     public function getModelPath($suffix = null): string
     {
-        if ($suffix && ! collect($this->model)->has($suffix)) {
+        if ($suffix && !collect($this->model)->has($suffix)) {
             $this->model = collect($this->model)->put($suffix, '');
         }
 
@@ -133,6 +133,19 @@ class Field implements Arrayable
     public function setModelProperty($value): void
     {
         $this->document->model->set($this->fullModelKey, $value);
+    }
+
+    /**
+     * @param $key
+     * @return \ArrayAccess|mixed
+     */
+    public function model($key = null): mixed
+    {
+        return Arr::get(
+            $this->model,
+            implode('.', [$key, 'value']),
+            Arr::get($this->model, $key ?? 'value')
+        );
     }
 
     public function getLabelProperty(): string
