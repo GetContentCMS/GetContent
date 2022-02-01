@@ -26,7 +26,7 @@ class RepeaterField extends Field
         return 'ri-function-line';
     }
 
-    public function getTemplateProperty(): \Illuminate\Support\Collection|string
+    public function getTemplateProperty(): Template
     {
         $template = $this->getAttribute('template');
 
