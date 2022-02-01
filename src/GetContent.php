@@ -43,18 +43,24 @@ class GetContent
         return $this->getAvailableFields()->get($type) ?? Field::class;
     }
 
-    public function getFieldTemplates()
+    public function getFieldTemplates($type = 'field')
     {
-        return Template::all();
+        $templates = Template::query();
+
+        if ($type) {
+            $templates->whereType($type);
+        }
+
+        return $templates->get();
     }
 
     public function getFiles($mime = null): \Illuminate\Support\Collection
     {
         $mimeToMatch = Str::before($mime, '*');
 
-        return collect(Storage::drive(config('getcontent.file_upload_disk'))->allFiles())->filter(function ($file) use ($mimeToMatch) {
+        return collect(Storage::disk(config('getcontent.file_upload_disk'))->allFiles())->filter(function ($file) use ($mimeToMatch) {
             if ($mimeToMatch) {
-                return Str::startsWith(Storage::drive(config('getcontent.file_upload_disk'))->getMimetype($file), $mimeToMatch);
+                return Str::startsWith(Storage::disk(config('getcontent.file_upload_disk'))->getMimetype($file), $mimeToMatch);
             }
 
             return true;
