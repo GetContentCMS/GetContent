@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GetContent</title>
     <link rel="stylesheet" href="{{GetContent::asset('css/app.css')}}">
+    @foreach(GetContent::getStyles() as $style)
+    <link rel="stylesheet" href="{{$style}}">
+    @endforeach
     @livewireStyles
     @stack('styles')
 </head>

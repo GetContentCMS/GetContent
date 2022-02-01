@@ -15,6 +15,7 @@ use Str;
 class GetContent
 {
     private array $fields = [];
+    private array $editorStyles = [];
 
     public static function version()
     {
@@ -67,6 +68,16 @@ class GetContent
         })->map(function ($file) {
             return new File($file);
         });
+    }
+
+    public function pushStyles(...$styles): void
+    {
+        $this->editorStyles = array_merge($this->editorStyles, $styles);
+    }
+
+    public function getStyles(): array
+    {
+        return $this->editorStyles;
     }
 
     public static function asset($url = '/'): string
