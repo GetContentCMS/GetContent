@@ -2,7 +2,7 @@
 
     @if($field->givenLabel)
         <x-slot name="header" class="flex text-sm text-gray-700 bg-gray-100/50">
-            <x-dynamic-component :component="$field->getIcon()" class="mr-2 w-5 h-5"/>
+            <x-dynamic-component :component="$field->template->meta->icon ?? $field->getIcon()" class="mr-2 w-5 h-5"/>
             {{$field->givenLabel}}
         </x-slot>
     @endif

@@ -6,6 +6,7 @@ use GetContent\CMS\Traits\HasFields;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 
 /**
  * @property $schema
@@ -17,7 +18,11 @@ class Template extends Model
     use HasFactory;
     use HasFields;
 
-    protected $fillable = ['name', 'slug', 'schema', 'meta'];
+    protected $fillable = ['name', 'slug', 'type', 'schema', 'meta'];
+
+    public $casts = [
+        'meta' => SchemalessAttributes::class,
+    ];
 
     /**
      * @var Document|null

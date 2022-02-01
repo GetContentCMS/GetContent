@@ -19,10 +19,12 @@ class GetContentTemplatesTest extends TestCase
         $templates = collect([
             Template::create([
                 'name' => 'Video', 'slug' => 'video',
+                'type' => 'field',
                 'schema' => [['type' => 'text', 'modelKey' => 'videoUrl']],
             ]),
             Template::create([
                 'name' => 'Download', 'slug' => 'download',
+                'type' => 'field',
                 'schema' => [['type' => 'file', 'modelKey' => 'file'], ['type' => 'text', 'modelKey' => 'caption']],
             ]),
         ]);
@@ -34,13 +36,15 @@ class GetContentTemplatesTest extends TestCase
     /** @test */
     public function component_lists_available_field_templates(): void
     {
-        $templates = collect([
+        collect([
             Template::create([
                 'name' => 'Video', 'slug' => 'video',
+                'type' => 'field',
                 'schema' => [['type' => 'text', 'modelKey' => 'videoUrl']],
             ]),
             Template::create([
                 'name' => 'Download', 'slug' => 'download',
+                'type' => 'field',
                 'schema' => [['type' => 'file', 'modelKey' => 'file'], ['type' => 'text', 'modelKey' => 'caption']],
             ]),
         ]);

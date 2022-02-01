@@ -12,6 +12,11 @@ class TemplateField extends Field
         return view('gc::editor.fields.template');
     }
 
+    public static function getIcon(): string
+    {
+        return 'ri-shape-line';
+    }
+
     // @todo DRY this duplicate of RepeaterField::getTemplateProperty
     public function getTemplateProperty(): Template
     {
