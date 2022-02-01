@@ -1,5 +1,5 @@
 <div x-data="documentBrowser" x-cloak>
-    <header class="flex justify-between items-center px-6 py-3 text-gray-400 dark">
+    <x-gc::app.header>
         <nav class="flex items-center space-x-2 text-lg">
             <a href="{{route('document:browser')}}" title="Go to top group">
                 <x-heroicon-o-collection class="inline-block w-5 h-5"/>
@@ -18,7 +18,7 @@
                     </div>
                 @endforeach
                 <x-heroicon-o-chevron-right class="flex-shrink-0 -mx-1 w-5 h-5 text-gray-600"
-                                            aria-hidden="true" />
+                                            aria-hidden="true"/>
                 <div class="text-gray-200">
                     {{$this->group->name}}
                 </div>
@@ -63,52 +63,38 @@
                 Delete
             </x-gc::button>
         </nav>
-    </header>
+    </x-gc::app.header>
 
-    <main class="p-4 mr-4 space-y-px bg-white rounded">
+    <x-gc::app.main>
         @foreach($items as $item)
-            <div class="flex items-center px-2 rounded group"
-                 :class="{
-                    'bg-blue-500 hover:bg-blue-400 text-white': inSelection('{{$item->uuid}}'),
-                    'hover:bg-gray-100': !inSelection('{{$item->uuid}}'),
-                 }">
-                @if($item->type === 'group')
-                    <label class="h-full">
-                        <input type="checkbox" value="{{$item->uuid}}" x-model="selectedGroups"
-                               :class="{'opacity-0 group-hover:opacity-100': !selectedItems}">
-                    </label>
-                    <a href="{{route('document:browser', $item->uuid)}}" class="flex flex-grow items-center py-3"
-                       title="Open {{$item->name}}">
-                        <div class="flex justify-center items-center mx-1 w-8 h-8 bg-white rounded-md">
-                            <x-heroicon-s-folder class="w-6 text-blue-400"/>
-                        </div>
+            @if($item->type === 'group')
+                <x-gc::app.list.item x-model="selectedGroups" :item-key="$item->uuid"
+                                     href="{{route('document:browser', $item->uuid)}}"
+                                     title="Browse {{$item->name}}">
+                    <x-slot name="icon">
+                        <x-heroicon-s-folder class="w-6 text-blue-400"/>
+                    </x-slot>
+                    {{$item->name}}
+                </x-gc::app.list.item>
+            @endif
+
+            @if($item->type === 'document')
+                <x-gc::app.list.item x-model="selectedDocuments" :item-key="$item->uuid"
+                                     href="{{route('document:editor', $item->uuid)}}"
+                                     title="Edit {{$item->name}}">
+                    <x-slot name="icon">
+                        <x-heroicon-o-document class="w-5 text-gray-600"/>
+                    </x-slot>
+                    <div class="flex-grow">
                         {{$item->name}}
-                    </a>
-                @else
-                    <label class="h-full">
-                        <input type="checkbox" value="{{$item->uuid}}" x-model="selectedDocuments"
-                               :class="{'opacity-0 group-hover:opacity-100': !selectedItems}">
-                    </label>
-                    <a href="{{route('document:editor', $item->uuid)}}" class="flex flex-grow items-center py-3"
-                       title="Open {{$item->name}}">
-                        <div class="flex justify-center items-center mx-1 w-8 h-8 bg-white rounded-md">
-                            <x-heroicon-o-document class="w-5 text-gray-600"/>
-                        </div>
-                        <div class="flex-grow">
-                            {{$item->name}}
-                        </div>
-                        <div title="Updated {{$item->updated_at}}" class="text-sm"
-                             :class="{
-                                'text-blue-200': inSelection('{{$item->uuid}}'),
-                                'text-gray-500': !inSelection('{{$item->uuid}}')
-                             }">
-                            {{$item->updated_at->diffForHumans()}}
-                        </div>
-                    </a>
-                @endif
-            </div>
+                    </div>
+                    <x-gc::app.list.meta-column title="Updated {{$item->updated_at}}">
+                        {{$item->updated_at->diffForHumans()}}
+                    </x-gc::app.list.meta-column>
+                </x-gc::app.list.item>
+            @endif
         @endforeach
-    </main>
+    </x-gc::app.main>
 
     <div class="p-8">
         {{$items->links()}}
