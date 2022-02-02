@@ -17,6 +17,8 @@
 
 @yield('body')
 
+<x-gc::notifications/>
+
 @livewireScripts
 <script defer src="{{GetContent::asset('js/app.js')}}"></script>
 @stack('scripts')
