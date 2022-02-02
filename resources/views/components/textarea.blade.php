@@ -1,5 +1,5 @@
 @props([
-    'id' => Str::uuid(),
+    'id' => '',
     'leadingIcon' => null,
     'trailingIcon' => null,
 ])

@@ -6,10 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GetContent</title>
-    <link rel="stylesheet" href="{{GetContent::asset('css/app.css')}}">
     @foreach(GetContent::getStyles() as $style)
     <link rel="stylesheet" href="{{$style}}">
     @endforeach
+    <link rel="stylesheet" href="{{GetContent::asset('css/app.css')}}">
     @livewireStyles
     @stack('styles')
 </head>

@@ -1,5 +1,6 @@
 @props([
     'id',
+    'title',
     'slideOver' => false,
     'autoFocus' => 'dialog'
     ])

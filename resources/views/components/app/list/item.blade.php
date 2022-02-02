@@ -1,4 +1,4 @@
-<div class="flex items-center px-2 rounded group"
+<div {{$attributes->class(['flex items-center px-2 rounded group'])->except(['x-model', 'href', 'title'])}}
      :class="{
         @isset($itemKey)
         'bg-blue-500 hover:bg-blue-400 text-white': inSelection('{{$itemKey}}'),
