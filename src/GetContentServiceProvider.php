@@ -61,6 +61,12 @@ class GetContentServiceProvider extends PackageServiceProvider
                     Route::get('/document/{document:uuid}', DocumentEditor::class)->name('document:editor');
 
                     Route::view('/files', 'gc::editor.file-browser')->name('files:browse');
+
+                    Route::view('/docs', 'gc::docs.ui-components')
+                        ->name('docs.components.index');
+                    Route::get('/docs/{section}', function ($section) {
+                        return view('gc::docs.ui-components.' . $section);
+                    })->name('docs.components');
                 });
         }
 

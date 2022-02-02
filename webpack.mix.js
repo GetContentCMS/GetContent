@@ -16,4 +16,4 @@ mix.js('resources/js/app.js', 'public/js')
         require("tailwindcss"),
     ])
     .sourceMaps(true, 'source-map')
-    // .browserSync('getcontent-2022.test')
+    .disableSuccessNotifications()
