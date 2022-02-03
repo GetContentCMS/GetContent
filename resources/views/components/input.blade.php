@@ -10,7 +10,7 @@
         'text-gray-900',
         'disabled:pointer-events-none',
 
-        'border-red-300 text-red-900 focus:ring-red-500 focus:ring-opacity-50 focus:border-red-500' => $attributes->has('error'),
+        'border-red-300 text-red-900 focus:ring-red-500 focus:ring-opacity-50 focus:border-red-500' => $attributes->get('error'),
 
         'pl-10' => $leadingIcon,
         'pr-10' => $trailingIcon,
@@ -19,7 +19,7 @@
         'dark:ring-opacity-50 dark:disabled:bg-gray-800',
         'dark:disabled:border-gray-600 dark:disabled:placeholder-gray-600',
 
-        'dark:border-red-500 dark:text-red-400  dark:focus:border-red-500' => $attributes->has('error'),
+        'dark:border-red-500 dark:text-red-400  dark:focus:border-red-500' => $attributes->get('error'),
 
         ]) {{$attributes->merge(['type' => 'text', 'id' => $id])->except(['label'])}}>
 
