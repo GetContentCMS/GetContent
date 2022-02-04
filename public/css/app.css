@@ -1854,6 +1854,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pt-5 {
   padding-top: 1.25rem;
 }
+.pl-2 {
+  padding-left: 0.5rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
+}
+.pr-12 {
+  padding-right: 3rem;
+}
+.pr-8 {
+  padding-right: 2rem;
+}
 .text-left {
   text-align: left;
 }
@@ -2454,6 +2466,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-600\/20:hover {
+  background-color: rgb(75 85 99 / 0.2);
+}
+
+.hover\:bg-gray-600\/10:hover {
+  background-color: rgb(75 85 99 / 0.1);
+}
+
 .hover\:text-gray-200:hover {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
@@ -2511,6 +2531,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .focus\:bg-blue-500:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.focus\:bg-gray-600\/20:focus {
+  background-color: rgb(75 85 99 / 0.2);
+}
+
+.focus\:bg-gray-600\/10:focus {
+  background-color: rgb(75 85 99 / 0.1);
 }
 
 .focus\:text-white:focus {
@@ -2816,6 +2844,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
+.dark .dark\:hover\:bg-gray-600\/20:hover {
+  background-color: rgb(75 85 99 / 0.2);
+}
+
+.dark .dark\:hover\:bg-gray-200\/10:hover {
+  background-color: rgb(229 231 235 / 0.1);
+}
+
+.dark .dark\:hover\:bg-gray-100\/10:hover {
+  background-color: rgb(243 244 246 / 0.1);
+}
+
 .dark .dark\:hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2844,6 +2884,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:focus\:bg-blue-700:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
+
+.dark .dark\:focus\:bg-gray-600\/20:focus {
+  background-color: rgb(75 85 99 / 0.2);
+}
+
+.dark .dark\:focus\:bg-gray-200\/10:focus {
+  background-color: rgb(229 231 235 / 0.1);
+}
+
+.dark .dark\:focus\:bg-gray-100\/10:focus {
+  background-color: rgb(243 244 246 / 0.1);
 }
 
 .dark .dark\:focus\:text-white:focus {

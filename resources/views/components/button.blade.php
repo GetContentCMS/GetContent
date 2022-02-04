@@ -12,7 +12,7 @@
 
     'text-gray-900 active:bg-gray-50',
     'bg-white border shadow-sm' => !$flat,
-    'bg-transparent hover:bg-gray-200 focus:bg-gray-200' => $flat,
+    'bg-transparent hover:bg-gray-600/10 focus:bg-gray-600/10' => $flat,
     'bg-gradient-to-b from-blue-500 to-blue-600 text-white border-blue-600 font-medium' => $primary,
     'active:from-blue-600' => $primary,
 
@@ -22,7 +22,7 @@
     'dark:border-gray-600 dark:bg-gray-700' => !$flat,
     'dark:border-blue-600' => $primary,
     'dark:active:bg-gray-600',
-    'dark:hover:bg-gray-700 dark:focus:bg-gray-700' => $flat,
+    'dark:hover:bg-gray-100/10 dark:focus:bg-gray-100/10' => $flat,
     ])->merge()}}>
     @isset($icon)
         <div @class([

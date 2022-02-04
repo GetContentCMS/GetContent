@@ -5,7 +5,7 @@
 
     <div class="contents relative" x-data>
         <select @class([
-        'appearance-none px-3 py-2 w-full rounded border shadow-sm focus-outline',
+        'appearance-none px-3 py-2 pr-8 w-full rounded border shadow-sm focus-outline',
         'text-gray-900',
         'disabled:pointer-events-none disabled:opacity-60',
 
@@ -20,8 +20,10 @@
         ]) {{$attributes->merge(['id' => $id])}} x-ref="select">
             {{$slot}}
         </select>
-        <x-heroicon-s-selector class="absolute right-2 top-3 w-5 h-5 dark:text-gray-100"
-                               ::class="{'opacity-40': $refs.select.disabled}"/>
+        <div class="flex absolute inset-0 justify-end items-center pointer-events-none pr-2">
+            <x-heroicon-s-selector class="w-5 h-5 dark:text-gray-100"
+                                   ::class="{'opacity-40': $refs.select.disabled}"/>
+        </div>
     </div>
 
 </x-gc::input-surround>
