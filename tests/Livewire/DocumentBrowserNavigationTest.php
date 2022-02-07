@@ -41,7 +41,7 @@ class DocumentBrowserNavigationTest extends TestCase
 
         Livewire::test(DocumentBrowser::class, ['group' => $groups->first()])
             ->call('createGroup', 'This Nested Group')
-            ->assertSee('Open This Nested Group');
+            ->assertSee('Browse This Nested Group');
 
         $this->assertDatabaseHas('groups', ['name' => 'This Nested Group', 'parent_id' => 1]);
     }
@@ -53,7 +53,7 @@ class DocumentBrowserNavigationTest extends TestCase
 
         Livewire::test(DocumentBrowser::class, ['group' => $groups->first()])
             ->call('createDocument', 'This Nested Document')
-            ->assertSee('Open This Nested Document');
+            ->assertSee('Edit This Nested Document');
 
         $this->assertDatabaseHas('documents', ['name' => 'This Nested Document', 'group_id' => 1]);
     }
