@@ -73,6 +73,24 @@ class Document extends Model
     }
 
     /**
+     * Model accessor retrieves the Field and passes the nested key
+     * to the Field->model accessor
+     *
+     * @param  string  $key
+     * @param  string|null  $nested
+     * @return mixed
+     */
+    public function model(string $key, string $nested = null): mixed
+    {
+        if (Str::contains($key, '.')) {
+            $nested = $nested ?? Str::after($key, '.');
+            $key = Str::before($key, '.');
+        }
+
+        return $this->fields->get($key)->model($nested);
+    }
+
+    /**
      * Calculates the next auto model name for the specified field type
      * by pulling out model names with the same type and
      * incrementing the highest iteration

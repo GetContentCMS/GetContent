@@ -220,4 +220,49 @@ class DocumentTest extends TestCase
             'text2' => ['value' => 'This is some more text'],
         ], $document->model->toArray());
     }
+
+    /** @test */
+    public function it_get_model_from_field(): void
+    {
+        $document = new Document(
+            [
+                'schema' => [
+                    [
+                        'type' => 'text',
+                        'modelKey' => 'text1',
+                    ],
+                    [
+                        'type' => 'text',
+                        'modelKey' => 'text2',
+                    ],
+                ],
+                'model' => [
+                    'text1' => ['value' => 'This is some text'],
+                    'text2' => ['value' => 'This is some more text'],
+                ],
+            ]
+        );
+
+        $this->assertEquals('This is some text', $document->model('text1'));
+    }
+
+    /** @test */
+    public function it_gets_nested_values_from_field(): void
+    {
+        $document = new Document(
+            [
+                'schema' => [
+                    [
+                        'type' => 'repeater',
+                        'modelKey' => 'repeater1',
+                    ],
+                ],
+                'model' => [
+                    'repeater1' => ['items' => [['text1' => ['value' => 'This is the value']]]],
+                ],
+            ]
+        );
+
+        $this->assertEquals('This is the value', $document->model('repeater1.items.0.text1'));
+    }
 }
