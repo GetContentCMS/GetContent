@@ -35,6 +35,7 @@
                 }"
               x-init="$nextTick(() => {this.initialHeight = $el.clientHeight; resize()})"
               @input="resize()"
+              wire:ignore
         {{$attributes}}
     >{{$slot}}</textarea>
 
