@@ -8,6 +8,7 @@
      x-data="popover('{{$placement}}', @if($boundary)'{{$boundary}}'@else null @endif)"
      x-init="open = {{$open ? 'true' : 'false'}}"
      @click.away="open = {{$open ? 'true' : 'false'}}"
+     @keydown.esc="open = {{$open ? 'true' : 'false'}}; $focus.within($refs.trigger).first()"
      @keydown.down="$focus.wrap().next()"
      @keydown.up="$focus.wrap().previous()"
 >
