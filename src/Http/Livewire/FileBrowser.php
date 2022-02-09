@@ -58,6 +58,7 @@ class FileBrowser extends Component
             $this->loadFiles($filename, $this->accept);
             $this->currentPath = $filename;
             $this->emit('fileBrowser-currentPath', $filename);
+
             return;
         }
 
@@ -67,9 +68,11 @@ class FileBrowser extends Component
     public function pathBreadcrumbs(): \Illuminate\Support\Collection
     {
         $path = '';
+
         return collect(explode('/', $this->currentPath))->map(function ($item) use (&$path) {
             $path .= "/{$item}";
+
             return (object) ['name' => $item, 'path' => $path];
-        })->filter(fn ($item) => !blank($item->name));
+        })->filter(fn ($item) => ! blank($item->name));
     }
 }

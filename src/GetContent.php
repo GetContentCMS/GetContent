@@ -27,7 +27,7 @@ class GetContent
      */
     public function registerField($alias, $class): void
     {
-        if (!is_subclass_of($class, Field::class)) {
+        if (! is_subclass_of($class, Field::class)) {
             throw new GetContentException('Fields must extend GetContent Field class');
         }
 
