@@ -43,4 +43,20 @@ class FileBrowserTest extends TestCase
             ->assertSee('Test Image.jpg')
             ->assertDontSee('Test Doc.pdf');
     }
+
+    /** @test */
+    public function shows_directories(): void
+    {
+        Storage::drive(config('getcontent.file_upload_disk'))->makeDirectory('Child Directory');
+
+        Storage::drive(config('getcontent.file_upload_disk'))->putFileAs(
+            '/Child Directory',
+            File::fake()->image('Image in child directory.jpg'),
+            'Image in child directory.jpg'
+        );
+
+        Livewire::test(FileBrowser::class)
+            ->assertSee('Child Directory')
+            ->assertDontSee('Image in child directory.jpg');
+    }
 }

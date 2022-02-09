@@ -26,6 +26,7 @@ class File
     {
         return [
             'filename' => $this->filename,
+            'name' => basename($this->filename),
             'url' => Storage::disk(config('getcontent.file_upload_disk'))->url($this->filename),
             'path' => Storage::disk(config('getcontent.file_upload_disk'))->path($this->filename),
             'size' => Storage::disk(config('getcontent.file_upload_disk'))->size($this->filename),

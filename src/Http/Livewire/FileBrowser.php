@@ -12,12 +12,20 @@ class FileBrowser extends Component
 {
     public \Illuminate\Support\Collection $files;
     public ?string $accept = null;
+    public ?string $path = null;
+    public ?string $currentPath = null;
     public int $perPage = 12;
     public int $currentPage = 1;
+    public ?string $teleportNav = null;
 
     public function mount(): void
     {
-        $this->files = GetContent::getFiles($this->accept)->map(fn ($file) => $file->info());
+        $this->loadFiles($this->path, $this->accept);
+    }
+
+    public function loadFiles($path, $accept): void
+    {
+        $this->files = GetContent::getFiles($path, $accept)->map(fn ($file) => $file->info())->sortBy('updated_at');
     }
 
     public function render(): \Illuminate\Contracts\View\View
@@ -42,5 +50,26 @@ class FileBrowser extends Component
         if ($this->currentPage > 1) {
             $this->currentPage--;
         }
+    }
+
+    public function open($filename, $mimeType): void
+    {
+        if ($mimeType === 'directory') {
+            $this->loadFiles($filename, $this->accept);
+            $this->currentPath = $filename;
+            $this->emit('fileBrowser-currentPath', $filename);
+            return;
+        }
+
+        $this->dispatchBrowserEvent('choose', $filename);
+    }
+
+    public function pathBreadcrumbs(): \Illuminate\Support\Collection
+    {
+        $path = '';
+        return collect(explode('/', $this->currentPath))->map(function ($item) use (&$path) {
+            $path .= "/{$item}";
+            return (object) ['name' => $item, 'path' => $path];
+        })->filter(fn ($item) => !blank($item->name));
     }
 }

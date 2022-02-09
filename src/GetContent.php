@@ -27,7 +27,7 @@ class GetContent
      */
     public function registerField($alias, $class): void
     {
-        if (! is_subclass_of($class, Field::class)) {
+        if (!is_subclass_of($class, Field::class)) {
             throw new GetContentException('Fields must extend GetContent Field class');
         }
 
@@ -55,19 +55,24 @@ class GetContent
         return $templates->get();
     }
 
-    public function getFiles($mime = null): \Illuminate\Support\Collection
+    public function getFiles($path = '/', $mime = null): \Illuminate\Support\Collection
     {
         $mimeToMatch = Str::before($mime, '*');
 
-        return collect(Storage::disk(config('getcontent.file_upload_disk'))->allFiles())->filter(function ($file) use ($mimeToMatch) {
-            if ($mimeToMatch) {
-                return Str::startsWith(Storage::disk(config('getcontent.file_upload_disk'))->getMimetype($file), $mimeToMatch);
-            }
+        return collect(Storage::disk(config('getcontent.file_upload_disk'))->files($path))
+            ->filter(function ($file) use ($mimeToMatch) {
+                if ($mimeToMatch) {
+                    return Str::startsWith(
+                        Storage::disk(config('getcontent.file_upload_disk'))->getMimetype($file),
+                        $mimeToMatch
+                    );
+                }
 
-            return true;
-        })->map(function ($file) {
-            return new File($file);
-        });
+                return true;
+            })->merge(Storage::disk(config('getcontent.file_upload_disk'))->directories($path))
+            ->map(function ($file) {
+                return new File($file);
+            });
     }
 
     public function pushStyles(...$styles): void
@@ -82,7 +87,7 @@ class GetContent
 
     public static function asset($url = '/'): string
     {
-        return asset(URL::asset('vendor/getcontent/cms/' . $url));
+        return asset(URL::asset('vendor/getcontent/cms/'.$url));
     }
 
     public function documents()
