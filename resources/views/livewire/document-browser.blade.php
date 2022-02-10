@@ -85,10 +85,10 @@
                     <x-slot name="icon">
                         <x-heroicon-o-document class="w-5 text-gray-600"/>
                     </x-slot>
-                    <div class="flex-grow">
+                    <div class="flex-grow truncate">
                         {{$item->name}}
                     </div>
-                    <x-gc::app.list.meta-column title="Updated {{$item->updated_at}}">
+                    <x-gc::app.list.meta-column class="flex-shrink-0" title="Updated {{$item->updated_at}}">
                         {{$item->updated_at->diffForHumans()}}
                     </x-gc::app.list.meta-column>
                 </x-gc::app.list.item>
