@@ -2,21 +2,21 @@
 
 namespace GetContent\CMS\Fields;
 
-use Arr;
 use GetContent\CMS\Document\Field;
 use GetContent\CMS\Models\Template;
+use Illuminate\Support\Arr;
 
 /**
  * @property \Illuminate\Support\Collection|string $template
  */
 class RepeaterField extends Field
 {
-    public function getEditorViewProperty(): \Illuminate\View\View
+    public function getEditorViewProperty(): \Illuminate\Contracts\View\View
     {
         return view('gc::editor.fields.repeater');
     }
 
-    public function getEditorSettingsViewProperty(): \Illuminate\View\View
+    public function getEditorSettingsViewProperty(): \Illuminate\Contracts\View\View
     {
         return view('gc::editor.fields.repeater-settings');
     }
