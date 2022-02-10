@@ -25,7 +25,7 @@ class FileBrowser extends Component
 
     public function loadFiles($path, $accept): void
     {
-        $this->files = GetContent::getFiles($path, $accept)->map(fn ($file) => $file->info())->sortBy('updated_at');
+        $this->files = GetContent::getFiles($path, $accept)->map(fn ($file) => (object) $file->info())->sortBy('updated_at');
     }
 
     public function render(): \Illuminate\Contracts\View\View
@@ -57,6 +57,7 @@ class FileBrowser extends Component
         if ($mimeType === 'directory') {
             $this->loadFiles($filename, $this->accept);
             $this->currentPath = $filename;
+            $this->currentPage = 1;
             $this->emit('fileBrowser-currentPath', $filename);
 
             return;

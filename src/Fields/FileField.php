@@ -3,6 +3,7 @@
 namespace GetContent\CMS\Fields;
 
 use GetContent\CMS\Document\Field;
+use GetContent\CMS\File;
 use Storage;
 
 class FileField extends Field
@@ -17,7 +18,10 @@ class FileField extends Field
         return 'heroicon-o-upload';
     }
 
-    public function asFile(): ?array
+    /**
+     * @throws \League\Flysystem\FileNotFoundException
+     */
+    public function asFile(): File|null
     {
         $filename = data_get($this->model, 'value');
 
@@ -25,14 +29,7 @@ class FileField extends Field
             return null;
         }
 
-        return [
-            'name' => Storage::disk(config('getcontent.file_upload_disk'))->getMetadata($filename)['path'],
-            'url' => Storage::disk(config('getcontent.file_upload_disk'))->url($filename),
-            'path' => Storage::disk(config('getcontent.file_upload_disk'))->path($filename),
-            'size' => Storage::disk(config('getcontent.file_upload_disk'))->size($filename),
-            'mime' => Storage::disk(config('getcontent.file_upload_disk'))->getMimetype($filename),
-            'updated_at' => Storage::disk(config('getcontent.file_upload_disk'))->lastModified($filename),
-        ];
+        return new File($filename);
     }
 
     public function removeFile($file): void

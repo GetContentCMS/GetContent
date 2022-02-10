@@ -5,26 +5,19 @@
     @endif
 
     @if($file = $field->asFile())
-        <x-gc::card compact title="{{$file['name']}}" class="w-max">
-            @if(Str::of($file['mime'])->startsWith('image'))
-                <img src="{{$file['url']}}" class="mx-auto max-h-32 rounded-md"/>
-            @endif
-            <x-slot name="footer">
-                <div class="flex space-x-2">
-                    <x-heroicon-o-document class="flex-shrink-0 w-6 h-6"/>
-                    <span class="flex-grow truncate">{{$file['name']}}</span>
-                    <x-gc::button flat title="Remove file"
-                                  wire:click="clearField('{{$model ?? null ?: $field->getModelPath()}}')">
-                        <x-slot name="icon">
-                            <x-heroicon-o-x/>
-                        </x-slot>
-                    </x-gc::button>
-                </div>
+        <x-gc::file-card :file="$file">
+            <x-slot name="controls">
+                <x-gc::button flat title="Remove file"
+                              wire:click="clearField('{{$model ?? null ?: $field->getModelPath()}}')">
+                    <x-slot name="icon">
+                        <x-heroicon-o-x/>
+                    </x-slot>
+                </x-gc::button>
             </x-slot>
-        </x-gc::card>
+        </x-gc::file-card>
     @else
         <div class="grid gap-3 p-3 w-max rounded border-2 border-dashed">
-            <x-gc::button @click="$store.modals['fileBrowserModal-{{$field->modelKey}}'] = true">
+            <x-gc::button @click="$store.modals['fileBrowserModal-{{$field->getModelPath()}}'] = true">
                 <x-slot name="icon"><x-ri-folder-open-line/></x-slot>
                 Browse Files
             </x-gc::button>
@@ -51,15 +44,15 @@
 
     <div class="dark" @choose="
         $wire.set('{{$model ?? null ?: $field->getModelPath('value')}}', $event.detail);
-        $store.modals['fileBrowserModal-{{$field->modelKey}}'] = false;
+        $store.modals['fileBrowserModal-{{$field->getModelPath()}}'] = false;
     ">
-        <x-gc::modal id="fileBrowserModal-{{$field->modelKey}}">
+        <x-gc::modal id="fileBrowserModal-{{$field->getModelPath()}}">
             <x-slot name="icon"><x-ri-folder-open-line/></x-slot>
             <x-slot name="title">
                 Browse Files
             </x-slot>
             <livewire:file-browser
-                wire:key="fileBrowser-{{$field->modelKey}}"
+                wire:key="fileBrowser-{{$field->getModelPath()}}"
                 :accept="$field->accept"
             />
         </x-gc::modal>
