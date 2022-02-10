@@ -42,7 +42,7 @@ class GetContentTest extends TestCase
     /** @test */
     public function only_returns_images(): void
     {
-        $files = GetContent::getFiles('image/*')
+        $files = GetContent::getFiles('/', 'image/*')
             ->map(fn ($file) => $file->filename)->flatten()->toArray();
 
         $this->assertEquals([
