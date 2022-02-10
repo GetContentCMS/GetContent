@@ -162,6 +162,27 @@ class DocumentEditorTest extends TestCase
             ->call('saveNewFile', 'file1.value', 'my-file.pdf')
             ->assertSet('model.file1.value', 'my-file.pdf')
             ->assertSet('newFile', null);
+
+        $this->assertTrue(Storage::disk(config('getcontent.file_upload_disk'))->exists('my-file.pdf'));
+    }
+
+    /** @test */
+    public function can_upload_to_specific_directory(): void
+    {
+        $document = Document::factory()->make();
+        $document->addField(['type' => 'file']);
+
+        $file = UploadedFile::fake()->create('PdUgQW5AurLryNjMfYZvJsN6ytty5yMDYrqMzqPt.pdf');
+        Storage::fake(config('getcontent.file_upload_disk'));
+
+        Livewire::test(DocumentEditor::class, ['document' => $document])
+            ->set('newFile', $file)
+            ->call('saveNewFile', 'file1.value', 'new-directory/my-file.pdf')
+            ->assertSet('model.file1.value', 'new-directory/my-file.pdf')
+            ->assertSet('newFile', null);
+
+        $this->assertEquals(['new-directory'], Storage::disk(config('getcontent.file_upload_disk'))->directories());
+        $this->assertTrue(Storage::disk(config('getcontent.file_upload_disk'))->exists('new-directory/my-file.pdf'));
     }
 
     /** @test */

@@ -26,7 +26,7 @@
                 wire:ignore.self
                 x-data="{ isUploading: false, progress: 0 }"
                 x-on:livewire-upload-start="isUploading = true; progress = 0"
-                x-on:livewire-upload-finish="isUploading = false; @this.saveNewFile('{{$model ?? null ?: $field->getModelPath('value')}}', $refs.fileInput.files[0].name)"
+                x-on:livewire-upload-finish="isUploading = false; @this.saveNewFile('{{$model ?? null ?: $field->getModelPath('value')}}', '{{$field->path}}/'+$refs.fileInput.files[0].name)"
                 x-on:livewire-upload-progress="progress = $event.detail.progress"
                 x-on:livewire-upload-error="isUploading = false"
             >
@@ -54,6 +54,7 @@
             <livewire:file-browser
                 wire:key="fileBrowser-{{$field->getModelPath()}}"
                 :accept="$field->accept"
+                :path="$field->path"
             />
         </x-gc::modal>
     </div>

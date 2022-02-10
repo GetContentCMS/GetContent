@@ -6,7 +6,6 @@ use Exception;
 use GetContent\CMS\Models\Document;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
-use Illuminate\View\View;
 use Str;
 
 /**
@@ -168,7 +167,7 @@ class Field implements Arrayable
         $this->setLabelProperty($label);
     }
 
-    public function getEditorViewProperty(): View
+    public function getEditorViewProperty(): \Illuminate\Contracts\View\View
     {
         return view('gc::editor.fields.unknown');
     }

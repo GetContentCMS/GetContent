@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static array getAvailableFields()
  * @method static string getFieldClassForType()
  * @method static \Illuminate\Support\Collection getFieldTemplates()
- * @method static \Illuminate\Support\Collection getFiles()
+ * @method static \Illuminate\Support\Collection getFiles($path, $accept)
  *
  * @see \GetContent\CMS\GetContent
  */

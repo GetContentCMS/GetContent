@@ -12,10 +12,13 @@ class FileBrowser extends Component
 {
     public \Illuminate\Support\Collection $files;
     public ?string $accept = null;
+
     public ?string $path = null;
     public ?string $currentPath = null;
+
     public int $perPage = 12;
     public int $currentPage = 1;
+
     public ?string $teleportNav = null;
 
     public function mount(): void
@@ -25,7 +28,9 @@ class FileBrowser extends Component
 
     public function loadFiles($path, $accept): void
     {
-        $this->files = GetContent::getFiles($path, $accept)->map(fn ($file) => (object) $file->info())->sortBy('updated_at');
+        $this->files = GetContent::getFiles($path, $accept)
+            ->map(fn ($file) => (object) $file->info())
+            ->sortBy('updated_at');
     }
 
     public function render(): \Illuminate\Contracts\View\View

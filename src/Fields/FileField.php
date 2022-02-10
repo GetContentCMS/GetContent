@@ -4,11 +4,11 @@ namespace GetContent\CMS\Fields;
 
 use GetContent\CMS\Document\Field;
 use GetContent\CMS\File;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class FileField extends Field
 {
-    public function getEditorViewProperty(): \Illuminate\View\View
+    public function getEditorViewProperty(): \Illuminate\Contracts\View\View
     {
         return view('gc::editor.fields.file');
     }
