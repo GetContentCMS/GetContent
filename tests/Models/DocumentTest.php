@@ -2,6 +2,7 @@
 
 namespace GetContent\CMS\Tests\Models;
 
+use GetContent\CMS\Fields\TextField;
 use GetContent\CMS\Models\Document;
 use GetContent\CMS\Tests\TestCase;
 
@@ -219,6 +220,39 @@ class DocumentTest extends TestCase
             'updatedText' => ['value' => 'This is some text'],
             'text2' => ['value' => 'This is some more text'],
         ], $document->model->toArray());
+    }
+
+    /** @test */
+    public function it_gets_specified_field(): void
+    {
+        $document = new Document(
+            [
+                'schema' => [
+                    [
+                        'type' => 'text',
+                        'modelKey' => 'text1',
+                    ],
+                    [
+                        'type' => 'text',
+                        'modelKey' => 'text2',
+                    ],
+                ],
+                'model' => [
+                    'text1' => ['value' => 'This is some text'],
+                    'text2' => ['value' => 'This is some more text'],
+                ],
+            ]
+        );
+
+        $this->assertEquals(
+            [
+                'modelKey' => 'text1',
+                'type' => 'text',
+                'order' => 0,
+                'model' => ['value' => 'This is some text'],
+            ],
+            $document->field('text1')->toArray()
+        );
     }
 
     /** @test */

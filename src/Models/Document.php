@@ -2,7 +2,9 @@
 
 namespace GetContent\CMS\Models;
 
+use GetContent\CMS\Document\Field;
 use GetContent\CMS\Facades\GetContent;
+use GetContent\CMS\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,7 +27,7 @@ class Document extends Model
     use SchemalessAttributesTrait;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'slug', 'schema', 'model', 'group_id'];
+    protected $fillable = ['name', 'slug', 'schema', 'model', 'group_id', 'created_at'];
 
     protected $casts = [
         'meta' => 'collection',
@@ -83,11 +85,17 @@ class Document extends Model
     public function model(string $key, string $nested = null): mixed
     {
         if (Str::contains($key, '.')) {
-            $nested = $nested ?? Str::after($key, '.');
+            $nested = Str::after($key, '.');
             $key = Str::before($key, '.');
         }
 
-        return $this->fields->get($key)->model($nested);
+        return $this->field($key)->model($nested);
+    }
+
+
+    public function field(string $key): Field
+    {
+        return $this->fields->get(Str::before($key, '.'));
     }
 
     /**
