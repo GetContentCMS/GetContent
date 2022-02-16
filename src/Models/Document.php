@@ -27,7 +27,7 @@ class Document extends Model
     use SchemalessAttributesTrait;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'slug', 'schema', 'model', 'group_id', 'created_at'];
+    protected $fillable = ['name', 'slug', 'group_id', 'schema', 'model', 'meta', 'created_at'];
 
     protected $casts = [
         'meta' => 'collection',
