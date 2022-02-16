@@ -1,8 +1,10 @@
 @props([
-    'type' => 'success',
     'message'
 ])
 <div
+    x-data="notificationMessage"
+    x-show="show"
+    x-transition.duration.400
     class="flex justify-between space-x-3 w-80 leading-tight text-white rounded-md border shadow-lg backdrop-blur pointer-events-auto bg-black/80 border-white/20"
     {{$attributes}}>
     <div class="py-3 pl-3 shrink-0">
@@ -19,7 +21,7 @@
         Action
     </div>
     <div class="flex items-center p-3 text-gray-500 shrink-0 hover:bg-black/90 hover:text-gray-300"
-        @click="remove(notification.id)">
+        @click="transitionOut()">
         <x-heroicon-o-x class="w-4 h-4"/>
     </div>
 </div>

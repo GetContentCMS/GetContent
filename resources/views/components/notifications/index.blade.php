@@ -1,7 +1,7 @@
 <div class="flex fixed top-0 z-50 flex-col justify-center items-center p-8 space-y-1 w-full pointer-events-none"
      x-data="notifications">
     <template x-for="(notification, index) in stack">
-        <x-gc::notifications.message />
+        <x-gc::notifications.message/>
     </template>
 </div>
 
@@ -28,8 +28,7 @@
                 *   }
                 * }
                 * */
-
-                add: function(message) {
+                add: function (message) {
                     if (typeof message === 'string') {
                         message = {message: message}
                     }
@@ -38,26 +37,39 @@
                         id: _.uniqueId(),
                         message: null,
                         type: 'success',
-                        timeout: 10000,
+                        timeout: 8000,
                         action: false
                     }, message)
 
                     this.stack.push(notification)
+                    this.stack.sort((el1, el2) => el1.id < el2.id)
+                },
 
-                    if (notification.timeout) {
-                        _.delay(id => this.remove(id), notification.timeout, notification.id)
+                remove(notification) {
+                    this.stack = this.stack.filter(i => i.id !== notification.id)
+                }
+            }))
+
+            Alpine.data('notificationMessage', () => ({
+                show: false,
+
+                init() {
+                    this.$nextTick(() => this.show = true)
+
+                    if (this.notification.timeout) {
+                        setTimeout(() => this.transitionOut(), this.notification.timeout)
                     }
                 },
 
-                remove(id) {
-                    let index = _.findKey(this.stack, {id})
-                    this.stack.splice(index, 1)
+                transitionOut() {
+                    this.show = false
+                    setTimeout(() => this.remove(this.notification), 500)
                 },
 
-                performAction(action, index) {
+                performAction(action) {
                     Livewire.emit(action.event, action.params)
-                    this.remove(index)
-                }
+                    this.remove(this.notification)
+                },
             }))
         })
     </script>
