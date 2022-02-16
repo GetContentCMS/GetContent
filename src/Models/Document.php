@@ -4,7 +4,6 @@ namespace GetContent\CMS\Models;
 
 use GetContent\CMS\Document\Field;
 use GetContent\CMS\Facades\GetContent;
-use GetContent\CMS\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -91,7 +90,6 @@ class Document extends Model
 
         return $this->field($key)->model($nested);
     }
-
 
     public function field(string $key): Field
     {

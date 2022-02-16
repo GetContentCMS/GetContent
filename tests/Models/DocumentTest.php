@@ -2,7 +2,6 @@
 
 namespace GetContent\CMS\Tests\Models;
 
-use GetContent\CMS\Fields\TextField;
 use GetContent\CMS\Models\Document;
 use GetContent\CMS\Tests\TestCase;
 
