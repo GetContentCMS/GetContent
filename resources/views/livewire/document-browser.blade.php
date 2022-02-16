@@ -85,7 +85,7 @@
                     <x-slot name="icon">
                         <x-heroicon-o-document class="w-5 text-gray-600"/>
                     </x-slot>
-                    <div class="flex-grow truncate">
+                    <div class="flex-grow">
                         {{$item->name}}
                     </div>
                     <x-gc::app.list.meta-column class="flex-shrink-0" title="Updated {{$item->updated_at}}">

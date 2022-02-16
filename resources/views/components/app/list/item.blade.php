@@ -7,18 +7,18 @@
         }">
 
     @isset($xModel, $itemKey)
-        <label class="h-full">
+        <label class="flex-none h-full">
             <input type="checkbox" value="{{$itemKey}}" x-model="{{$xModel}}"
                    :class="{'opacity-0 group-hover:opacity-100': !selectedItems}">
         </label>
     @endif
 
     @isset($href)
-        <a href="{{$href}}" class="flex flex-grow items-center py-3"
+        <a href="{{$href}}" class="flex items-center py-3 w-full"
             {{$attributes->only('title')}}>
 
             @isset($icon)
-                <div class="flex justify-center items-center mx-1 w-8 h-8 bg-white rounded-md">
+                <div class="flex flex-none justify-center items-center mx-1 w-8 h-8 bg-white rounded-md">
                     {{$icon}}
                 </div>
             @endif
@@ -26,10 +26,10 @@
             {{$slot}}
         </a>
     @else
-        <div class="flex flex-grow items-center py-3" {{$attributes->get('title')}}>
+        <div class="flex items-center py-3 w-full" {{$attributes->get('title')}}>
 
             @isset($icon)
-                <div class="flex justify-center items-center mx-1 w-8 h-8 bg-white rounded-md">
+                <div class="flex flex-none justify-center items-center mx-1 w-8 h-8 bg-white rounded-md">
                     {{$icon}}
                 </div>
             @endif
