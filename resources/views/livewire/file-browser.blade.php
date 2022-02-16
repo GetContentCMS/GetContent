@@ -12,19 +12,19 @@
             <template x-teleport="{{$teleportNav}}">
                 @endif
                 <nav class="flex items-center space-x-2 text-lg">
-                    <button wire:click="open('/', 'directory')">
-                        <x-heroicon-o-folder-open class="inline-block w-5 h-5"/>
+                    <x-gc::button flat wire:click="open('/', 'directory')">
+                        <x-slot name="icon"><x-heroicon-o-folder-open /></x-slot>
                         Files
-                    </button>
+                    </x-gc::button>
                     @foreach($this->pathBreadcrumbs() as $item)
                         <div class="@if(!$loop->last) hidden sm:contents @else contents @endif">
                             <x-heroicon-o-chevron-right class="flex-shrink-0 mx-2 w-5 h-5 text-gray-600"
                                                         aria-hidden="true"/>
-                            <button wire:click="open('{{$item->path}}', 'directory')"
+                            <x-gc::button flat wire:click="open('{{$item->path}}', 'directory')"
                                     title="Go back to {{$item->name}}">
                                 @if ($loop->last) <span class="sm:hidden">&hellip;</span> @endif
                                 <span class="hidden truncate sm:flex">{{$item->name}}</span>
-                            </button>
+                            </x-gc::button>
                         </div>
                     @endforeach
                 </nav>
