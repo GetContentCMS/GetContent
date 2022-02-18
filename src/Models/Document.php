@@ -41,7 +41,7 @@ class Document extends Model
     protected static function booted(): void
     {
         static::creating(function ($document) {
-            $document->uuid = $document->uuid ?? (string) Str::uuid();
+            $document->uuid = $document->uuid ?? (string)Str::uuid();
             $document->slug = $document->slug ?? Str::slug($document->name);
         });
     }
@@ -53,7 +53,7 @@ class Document extends Model
 
     public function getUsingGroupSchemaAttribute(): bool
     {
-        return blank($this->schema) && $this->group && ! blank($this->group->schema);
+        return blank($this->schema) && $this->group && !blank($this->group->schema);
     }
 
     /**
@@ -89,11 +89,16 @@ class Document extends Model
             $key = Str::before($key, '.');
         }
 
-        return $this->field($key)->model($nested);
+        return $this->field($key)?->model($nested);
     }
 
-
-    public function field(string $key): Field
+    /**
+     * Model accessor retrieves the Field by modelKey
+     *
+     * @param  string  $key
+     * @return Field
+     */
+    public function field(string $key): ?Field
     {
         return $this->fields->get(Str::before($key, '.'));
     }
@@ -120,7 +125,7 @@ class Document extends Model
             ->sort()
             ->last();
 
-        return $type.((int) filter_var($lastOfType, FILTER_SANITIZE_NUMBER_INT) + 1);
+        return $type.((int)filter_var($lastOfType, FILTER_SANITIZE_NUMBER_INT) + 1);
     }
 
     /**
@@ -135,7 +140,7 @@ class Document extends Model
      */
     public function addField($fieldAttributes, $initialValue = null, int $spliceIndex = null): Document
     {
-        if (! Arr::has($fieldAttributes, 'modelKey')) {
+        if (!Arr::has($fieldAttributes, 'modelKey')) {
             // Auto create model key
             $fieldAttributes['modelKey'] = $this->nextModelOfType(Arr::get($fieldAttributes, 'type'));
         }
@@ -207,7 +212,13 @@ class Document extends Model
         return $this;
     }
 
-    public function changeModelKey(mixed $modelKey, mixed $newModelKey)
+    /**
+     * Changes the modelKey of a field
+     * @param  mixed  $modelKey
+     * @param  mixed  $newModelKey
+     * @return void
+     */
+    public function changeModelKey(mixed $modelKey, mixed $newModelKey): void
     {
         $this->schema->transform(function ($field) use ($newModelKey, $modelKey) {
             if ($field['modelKey'] === $modelKey) {
@@ -219,5 +230,18 @@ class Document extends Model
 
         $this->model[$newModelKey] = $this->model[$modelKey];
         $this->model->forget($modelKey);
+    }
+
+    /**
+     * Only return documents with published_at
+     * dates in the future or not set
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->where('published_at', '<', now())
+            ->orWhereNull('published_at');
     }
 }

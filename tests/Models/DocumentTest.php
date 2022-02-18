@@ -256,6 +256,26 @@ class DocumentTest extends TestCase
     }
 
     /** @test */
+    public function it_handles_unknown_fields_gracefully(): void
+    {
+        $document = new Document(
+            [
+                'schema' => [
+                    [
+                        'type' => 'text',
+                        'modelKey' => 'text1',
+                    ],
+                ],
+                'model' => [
+                    'text1' => ['value' => 'This is some text'],
+                ],
+            ]
+        );
+
+        $this->assertNull($document->field('text2'));
+    }
+
+    /** @test */
     public function it_get_model_from_field(): void
     {
         $document = new Document(
@@ -298,5 +318,26 @@ class DocumentTest extends TestCase
         );
 
         $this->assertEquals('This is the value', $document->model('repeater1.items.0.text1'));
+    }
+
+    /** @test */
+    public function it_handles_unknown_models_gracefully(): void
+    {
+        $document = new Document(
+            [
+                'schema' => [
+                    [
+                        'type' => 'text',
+                        'modelKey' => 'text1',
+                    ],
+                ],
+                'model' => [
+                    'text1' => ['value' => 'This is some text'],
+                ],
+            ]
+        );
+
+        $this->assertNull($document->model('text2'));
+        $this->assertNull($document->model('text1.foo'));
     }
 }
