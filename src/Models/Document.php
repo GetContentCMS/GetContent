@@ -4,7 +4,6 @@ namespace GetContent\CMS\Models;
 
 use GetContent\CMS\Document\Field;
 use GetContent\CMS\Facades\GetContent;
-use GetContent\CMS\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -41,7 +40,7 @@ class Document extends Model
     protected static function booted(): void
     {
         static::creating(function ($document) {
-            $document->uuid = $document->uuid ?? (string)Str::uuid();
+            $document->uuid = $document->uuid ?? (string) Str::uuid();
             $document->slug = $document->slug ?? Str::slug($document->name);
         });
     }
@@ -53,7 +52,7 @@ class Document extends Model
 
     public function getUsingGroupSchemaAttribute(): bool
     {
-        return blank($this->schema) && $this->group && !blank($this->group->schema);
+        return blank($this->schema) && $this->group && ! blank($this->group->schema);
     }
 
     /**
@@ -125,7 +124,7 @@ class Document extends Model
             ->sort()
             ->last();
 
-        return $type.((int)filter_var($lastOfType, FILTER_SANITIZE_NUMBER_INT) + 1);
+        return $type.((int) filter_var($lastOfType, FILTER_SANITIZE_NUMBER_INT) + 1);
     }
 
     /**
@@ -140,7 +139,7 @@ class Document extends Model
      */
     public function addField($fieldAttributes, $initialValue = null, int $spliceIndex = null): Document
     {
-        if (!Arr::has($fieldAttributes, 'modelKey')) {
+        if (! Arr::has($fieldAttributes, 'modelKey')) {
             // Auto create model key
             $fieldAttributes['modelKey'] = $this->nextModelOfType(Arr::get($fieldAttributes, 'type'));
         }
