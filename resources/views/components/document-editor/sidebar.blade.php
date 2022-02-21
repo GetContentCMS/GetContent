@@ -3,7 +3,7 @@
         href="{{route('document:browser', ['group' => $document->group?->uuid])}}">
         Close
     </x-gc::button>
-    <x-gc::button primary flat class="flex-grow" wire:click="save">
+    <x-gc::button primary flat class="flex-grow" wire:click="save" wire:loading.attr="disabled" wire:target="save">
         Save
     </x-gc::button>
 </div>
