@@ -4,8 +4,10 @@
     'format' => 'DD/MM/yyyy',
     'firstDay' => 1,
 ])
-<div class="flex items-end space-x-2" {{$attributes->wire('model')}}
-        x-data="dateInput('{{$format}}', '{{$attributes->get('wire:model')}}')">
+<div class="flex items-end space-x-2"
+     {{$attributes->wire('model')}}
+     x-data="dateInput('{{$format}}', '{{$attributes->wire('model')?->value}}')"
+     wire:ignore>
     <x-gc::input
         x-ref="date"
         ::id="$id('dateInput')"
@@ -17,7 +19,7 @@
             blurFieldOnSelect: false,
             theme: document.querySelector('.dark #'+$el.id) ? 'dark' : 'null'
         })"
-        @change="date = $el.value; updateDate()"
+        @change.stop="date = $el.value; updateDate()"
         class="w-48"
         leading-icon="heroicon-o-calendar"
         :disabled="$disabled"
@@ -26,14 +28,16 @@
     @if($time)
         <div class="flex items-center space-x-1">
             <x-gc::input value="00" min="0" max="24" class="w-12" x-ref="hour" :disabled="$disabled"
-                         x-model="hour" @keyup.up.prevent="increment('hour', 24)"
-                         @keyup.down.prevent="decrement('hour')"
-                         @change="updateDate"/>
+                         x-model="hour"
+                         @keyup.up.stop="increment('hour', 24)"
+                         @keyup.down.stop="decrement('hour')"
+                         @change.stop="updateDate"/>
             <div class="text-gray-500">:</div>
             <x-gc::input value="00" min="0" max="60" class="w-12" x-ref="minute" :disabled="$disabled"
-                         x-model="minute" @keyup.up.prevent="increment('minute', 60)"
-                         @keyup.down.prevent="decrement('minute')"
-                         @change="updateDate"/>
+                         x-model="minute"
+                         @keyup.up.stop="increment('minute', 60)"
+                         @keyup.down.stop="decrement('minute')"
+                         @change.stop="updateDate"/>
         </div>
     @endif
 </div>

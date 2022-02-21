@@ -6,6 +6,7 @@ use GetContent\CMS\Commands\GetContentCommand;
 use GetContent\CMS\Facades\GetContent;
 use GetContent\CMS\Facades\Nav;
 use GetContent\CMS\Fields\ContentField;
+use GetContent\CMS\Fields\DateField;
 use GetContent\CMS\Fields\FileField;
 use GetContent\CMS\Fields\ImageField;
 use GetContent\CMS\Fields\RepeaterField;
@@ -80,6 +81,7 @@ class GetContentServiceProvider extends PackageServiceProvider
         GetContent::registerField('text', TextField::class);
         GetContent::registerField('textarea', TextareaField::class);
         GetContent::registerField('content', ContentField::class);
+        GetContent::registerField('date', DateField::class);
         GetContent::registerField('file', FileField::class);
         GetContent::registerField('switch', SwitchField::class);
         GetContent::registerField('template', TemplateField::class);
