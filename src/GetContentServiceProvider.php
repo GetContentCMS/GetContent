@@ -19,6 +19,7 @@ use GetContent\CMS\Http\Livewire\DocumentEditor;
 use GetContent\CMS\Http\Livewire\FileBrowser;
 use GetContent\CMS\View\Composers\GetContentComposer;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -66,7 +67,7 @@ class GetContentServiceProvider extends PackageServiceProvider
                     Route::view('/docs', 'gc::docs.ui-components')
                         ->name('docs.components.index');
                     Route::get('/docs/{section}', function ($section) {
-                        return view('gc::docs.ui-components.' . $section);
+                        return view('gc::docs.ui-components.'.$section);
                     })->name('docs.components');
                 });
         }
@@ -91,6 +92,16 @@ class GetContentServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        Str::macro('widont', static function ($string) {
+            return preg_replace_callback('|([^\s])\s+([^\s]+)\s*$|u', function ($matches) {
+                if (str::contains($matches[2], '-')) {
+                    return $matches[1].' '.str_replace('-', '&#8209;', $matches[2]);
+                }
+
+                return $matches[1].'&nbsp;'.$matches[2];
+            }, $string);
+        });
+
         Livewire::component('file-browser', FileBrowser::class);
         Livewire::component('document-browser', DocumentBrowser::class);
         Livewire::component('document-editor', DocumentEditor::class);
