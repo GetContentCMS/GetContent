@@ -45,7 +45,7 @@ class RepeaterField extends Field
             $items[] = $this->template->fields->keys()->flip()->map(fn () => '')->toArray();
         });
 
-        $this->model = array_merge($this->model, ['items' => $items]);
+        $this->model = array_merge($this->model ?? [], ['items' => $items]);
     }
 
     public function removeField($index): void
