@@ -32,6 +32,10 @@ class Document extends Model
         'meta' => 'collection',
     ];
 
+    protected $dates = [
+        'published_at',
+    ];
+
     protected $schemalessAttributes = [
         'schema',
         'model',

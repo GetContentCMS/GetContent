@@ -97,6 +97,6 @@ class GetContent
 
     public function documentsFromGroup($groupSlug)
     {
-        return Group::whereSlug($groupSlug)->firstOrFail()->documents();
+        return Group::whereSlug($groupSlug)->firstOrFail()->documents()->with('group');
     }
 }
